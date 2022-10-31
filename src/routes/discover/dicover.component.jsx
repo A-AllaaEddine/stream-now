@@ -37,9 +37,9 @@ const Discover = () => {
     }
 
     const handleScroll = (event) => {
-        console.log(event.currentTarget.scrollTop);
+        // console.log(event.currentTarget.scrollTop);
         // console.log(event.currentTarget.offsetHeight);
-        if(event.currentTarget.scrollTop <= 230) {
+        if(event.currentTarget.scrollTop <= 180) {
             setIsScrolling(false);
         }
         else {
