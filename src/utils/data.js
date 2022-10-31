@@ -55,7 +55,7 @@ export const Movies = [
         name: 'The Gray Man',
         imageUrl: 'https://i.ibb.co/CP6wxMN/MV5-BOWY4-Mm-Fi-Y2-Qt-Mz-E1-YS00-NTg1-LWIw-OTQt-YTI4-ZGUz-NWIx-NTVm-Xk-Ey-Xk-Fqc-Gde-QXVy-ODk4-OTc3.jpg'
     },{
-        id: 0,
+        id: 12,
         name: 'Black Adam',
         imageUrl: 'https://i.ibb.co/k90PwdJ/Black-Adam-Infobox-Image.webp',
         genre: 'Action | Fantazy | Sci-Fi',
@@ -64,47 +64,47 @@ export const Movies = [
         actors: 'Dwyane Johnsone, Sarah Shahi, Viola Davis',
         summary: "Nearly 5,000 years afetr he was bestowed with allmighty powers of the egyptian gods and imprisoned just as quickly- Black Adam is freed from his earthly tomb, ready to unleach his unique form of justice on the modern word."
     },{
-        id: 1,
+        id: 13,
         name: 'Avengers: Endgame',
         imageUrl: 'https://i.ibb.co/sJQxvyy/d1pklzbuyaab0la-1552597012.jpg'
     },{
-        id: 2,
+        id: 14,
         name: 'Iron Man',
         imageUrl: 'https://i.ibb.co/2srMprN/iron-man-hi-res-textless-poster-by-ihaveanawesomename-d7xwar7-fullview.jpg'
     },{
-        id: 3,
+        id: 15,
         name: 'The Gentelmen',
         imageUrl: 'https://i.ibb.co/bs4jsDY/MV5-BZm-Qy-ZDBj-Nj-Mt-Mj-Iz-OS00-MTMy-LWJm-ZWMt-N2-Ix-MWFm-Yjg0-MDlh-Xk-Ey-Xk-Fqc-Gde-QXVy-NDIz-Mzcw.jpg'
     },{
-        id: 4,
+        id: 16,
         name: 'Purple Hearts',
         imageUrl: 'https://i.ibb.co/XbSPmLT/MV5-BNz-I4-ZTAw-Nz-Et-NTk5-YS00-ZWJm-LWI1-ODMt-OTU4-MTM5-Mz-Q4-OWM0-Xk-Ey-Xk-Fqc-Gde-QXVy-MTEz-MTI1.jpg'
     },{
-        id: 5,
+        id: 17,
         name: 'The Gray Man',
         imageUrl: 'https://i.ibb.co/CP6wxMN/MV5-BOWY4-Mm-Fi-Y2-Qt-Mz-E1-YS00-NTg1-LWIw-OTQt-YTI4-ZGUz-NWIx-NTVm-Xk-Ey-Xk-Fqc-Gde-QXVy-ODk4-OTc3.jpg'
     },{
-        id: 6,
+        id: 18,
         name: 'Black Adams',
         imageUrl: 'https://i.ibb.co/k90PwdJ/Black-Adam-Infobox-Image.webp'
     },{
-        id: 7,
+        id: 19,
         name: 'Avengers: Endgame',
         imageUrl: 'https://i.ibb.co/sJQxvyy/d1pklzbuyaab0la-1552597012.jpg'
     },,{
-        id: 8,
+        id: 20,
         name: 'Iron Man',
         imageUrl: 'https://i.ibb.co/2srMprN/iron-man-hi-res-textless-poster-by-ihaveanawesomename-d7xwar7-fullview.jpg'
     },{
-        id: 9,
+        id: 21,
         name: 'The Gentelmen',
         imageUrl: 'https://i.ibb.co/bs4jsDY/MV5-BZm-Qy-ZDBj-Nj-Mt-Mj-Iz-OS00-MTMy-LWJm-ZWMt-N2-Ix-MWFm-Yjg0-MDlh-Xk-Ey-Xk-Fqc-Gde-QXVy-NDIz-Mzcw.jpg'
     },{
-        id: 10,
+        id: 22,
         name: 'Purple Hearts',
         imageUrl: 'https://i.ibb.co/XbSPmLT/MV5-BNz-I4-ZTAw-Nz-Et-NTk5-YS00-ZWJm-LWI1-ODMt-OTU4-MTM5-Mz-Q4-OWM0-Xk-Ey-Xk-Fqc-Gde-QXVy-MTEz-MTI1.jpg'
     },{
-        id: 11,
+        id: 23,
         name: 'The Gray Man',
         imageUrl: 'https://i.ibb.co/CP6wxMN/MV5-BOWY4-Mm-Fi-Y2-Qt-Mz-E1-YS00-NTg1-LWIw-OTQt-YTI4-ZGUz-NWIx-NTVm-Xk-Ey-Xk-Fqc-Gde-QXVy-ODk4-OTc3.jpg'
     },

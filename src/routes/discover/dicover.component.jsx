@@ -4,9 +4,13 @@ import { Link } from 'react-router-dom';
 
 import { Movies, Series } from '../../utils/data';
 import { useState } from 'react';
+import { useEffect } from 'react';
+import { useContext } from 'react';
+import { MoviesContext } from '../../context/movies.context';
 
 import MovieDetails from '../../components/movie-details/movie-details.component';
 import MovieCard from '../../components/movie-card/movie-card.component';
+
 
 
 const Categories = [
@@ -26,10 +30,22 @@ const Categories = [
 ]
 
 const Discover = () => {
-    const [ movies, setMovies ] = useState(Movies);
+    const [ localMovies, setLocalMovies ] = useState([]);
     const [ clicked, setClicked ] = useState(false);
     const [ selectedMovie, setSelectedMovie ] = useState(Movies[0]);
     const [ isScrolling, setIsScrolling ] = useState(false);
+    const [ resources, setResources ] = useState([]);
+    const [ catalogs, setCatalogs ] = useState([]);
+
+    const { movies } = useContext(MoviesContext)
+
+
+
+    useEffect(() => {
+        setLocalMovies(movies);
+    }, [])
+
+    console.log(resources, catalogs);
 
     const selectItem = (movieItem) => {
         setSelectedMovie(movieItem);
@@ -38,7 +54,6 @@ const Discover = () => {
 
     const handleScroll = (event) => {
         // console.log(event.currentTarget.scrollTop);
-        // console.log(event.currentTarget.offsetHeight);
         if(event.currentTarget.scrollTop <= 180) {
             setIsScrolling(false);
         }
@@ -76,7 +91,7 @@ const Discover = () => {
             </div>
             <div className={`${isScrolling ? 'isScrolling' : null} items-container`} onScroll={handleScroll}>
                     {
-                        movies.map((movie) => {
+                        localMovies.map((movie) => {
                             return (
                                 <MovieCard key={movie.id}  movie={movie} selectItem={selectItem}/>
                             )
