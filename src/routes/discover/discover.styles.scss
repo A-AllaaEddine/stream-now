@@ -8,7 +8,7 @@
     background-color: #201F32;
     color: white;
     padding-bottom: 20px;
-    overflow-y: scroll;
+    overflow-y: hidden;
 
 
     
@@ -168,6 +168,8 @@
         // scroll-snap-type: y mandatory;
         scroll-padding-inline: 15px;
         position: relative;
+
+        transition: 0.5s;
 
         &.isScrolling {
             height: 80%;

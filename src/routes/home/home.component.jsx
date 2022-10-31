@@ -44,7 +44,7 @@ const Home = () => {
                     <h2>Movies - Popular</h2>
                     <div className='movies-list-container'>
                         {
-                            movies.map((movie) => {
+                            movies.filter((_, idx) => idx < 20).map((movie) => {
                                 return (
                                     <MovieCard key={movie.id} movie={movie} selectItem={selectItem} />
                                 )
@@ -56,7 +56,7 @@ const Home = () => {
                     <h2>Series - Popular</h2>
                     <div className='movies-list-container'>
                         {
-                            movies.filter((_, idx) => idx < 10).map((movie) => {
+                            movies.filter((_, idx) => idx < 20).map((movie) => {
                                 return (
                                     <MovieCard key={movie.id} movie={movie} selectItem={selectItem} />
                                 )
@@ -68,7 +68,7 @@ const Home = () => {
                     <h2>Series - Popular</h2>
                     <div className='movies-list-container'>
                         {
-                            movies.map((movie) => {
+                            movies.filter((_, idx) => idx < 20).map((movie) => {
                                 return (
                                     <MovieCard key={movie.id} movie={movie} selectItem={selectItem} />
                                 )

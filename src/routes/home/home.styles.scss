@@ -28,6 +28,7 @@
         scroll-padding-inline: auto;
         position: relative;
         padding-bottom: 70px;
+
         transition: 0.5s;
 
         &.isScrolling {
@@ -67,8 +68,9 @@
             flex-direction: column;
             justify-content: space-around;
             align-items: flex-start;
-            scroll-snap-align: start;
+            // scroll-snap-align: start;
             padding-top: 20px;
+            padding-inline: 10px;
     
     
     
