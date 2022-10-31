@@ -37,9 +37,14 @@ const Discover = () => {
     }
 
     const handleScroll = (event) => {
-        console.log('scrolling')
-        console.log(isScrolling);
-        setIsScrolling(true);
+        console.log(event.currentTarget.scrollTop);
+        // console.log(event.currentTarget.offsetHeight);
+        if(event.currentTarget.scrollTop <= 230) {
+            setIsScrolling(false);
+        }
+        else {
+            setIsScrolling(true);
+        }
     };
 
     const toggleOnClick = () => {

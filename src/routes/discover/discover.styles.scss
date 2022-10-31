@@ -8,6 +8,7 @@
     background-color: #201F32;
     color: white;
     padding-bottom: 20px;
+    overflow-y: scroll;
 
 
     
@@ -154,14 +155,17 @@
         padding-inline: 10px;
         padding-top: 30px;
 
-        display: grid;
-        grid-template-columns: repeat(9, 1fr);
-        column-gap: 1px;
-        row-gap: 30px;
+        // display: grid;
+        // grid-template-columns: repeat(9, 1fr);
+        // column-gap: 1px;
+        // row-gap: 30px;
 
-        overflow-x: auto;
-        overscroll-behavior-inline: contain;
-        scroll-snap-type: inline mandatory;
+        display: flex;
+        flex-flow: row wrap;
+
+        overflow-y: auto;
+        overscroll-behavior-y: contain;
+        // scroll-snap-type: y mandatory;
         scroll-padding-inline: 15px;
         position: relative;
 

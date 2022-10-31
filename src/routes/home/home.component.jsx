@@ -20,9 +20,15 @@ const Home = () => {
     
 
     const handleScroll = (event) => {
-        console.log('scrolling')
-        console.log(isScrolling);
-        setIsScrolling(true);
+        // console.log('scrolling')
+        // console.log(isScrolling);
+        // console.log(event.currentTarget.scrollTop);
+        if(event.currentTarget.scrollTop <= 230) {
+            setIsScrolling(false);
+        }
+        else {
+            setIsScrolling(true);
+        }
     };
 
     const selectItem = (movieItem) => {
@@ -50,7 +56,7 @@ const Home = () => {
                     <h2>Series - Popular</h2>
                     <div className='movies-list-container'>
                         {
-                            movies.map((movie) => {
+                            movies.filter((_, idx) => idx < 10).map((movie) => {
                                 return (
                                     <MovieCard key={movie.id} movie={movie} selectItem={selectItem} />
                                 )
