@@ -1,5 +1,5 @@
 .home-container {
-    width: 96%;
+    max-width: 96%;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -9,12 +9,6 @@
     color: white;
     padding-bottom: 20px;
     margin: 0;
-
-    
-
-   
-
-    
 
     
     
@@ -33,10 +27,12 @@
         scroll-snap-type: y mandatory;
         scroll-padding-inline: auto;
         position: relative;
-
-        
-
         padding-bottom: 70px;
+        transition: 0.5s;
+
+        &.isScrolling {
+            height: 80%;
+        }
 
         &::-webkit-scrollbar {
             width: 10px;

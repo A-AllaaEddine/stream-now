@@ -10,6 +10,13 @@
     position: relative;
     background-color: #202030;
 
+    transition: 0.5s;
+
+
+    &.isScrolling {
+        height: 10%;
+    }
+
     p {
         margin: 0px;
         margin-top: 8px;
@@ -23,7 +30,7 @@
         position: absolute;
         right: 0px;
         top: 0px;
-        width: 70%;
+        width: 60%;
         height: 100%;
         overflow: hidden;
         background-repeat: no-repeat;

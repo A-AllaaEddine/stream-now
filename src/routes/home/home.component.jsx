@@ -5,20 +5,35 @@ import { useState } from 'react';
 
 import MovieDetails from '../../components/movie-details/movie-details.component';
 import MovieCard from '../../components/movie-card/movie-card.component';
+import { useEffect } from 'react';
+
+
+
+
 
 const Home = () => {
     const [ movies, setMovies ] = useState(Movies);
 
     const [ selectedMovie, setSelectedMovie ] = useState(Movies[0]);
+    const [ isScrolling, setIsScrolling ] = useState(false);
+
+    
+
+    const handleScroll = (event) => {
+        console.log('scrolling')
+        console.log(isScrolling);
+        setIsScrolling(true);
+    };
 
     const selectItem = (movieItem) => {
         setSelectedMovie(movieItem);
+        setIsScrolling(false);
     }
 
     return (
         <div className='home-container'>
-            <MovieDetails movie={selectedMovie} />
-            <div className='items-container'>
+            <MovieDetails isScrolling={isScrolling}  movie={selectedMovie} />
+            <div className={`${isScrolling ? 'isScrolling' : null} items-container`} onScroll={handleScroll}>
                 <div className='movies-container'>
                     <h2>Movies - Popular</h2>
                     <div className='movies-list-container'>

@@ -1,8 +1,8 @@
 import './movie-details.styles.scss';
 
-const MovieDetails = ({ movie }) => {
+const MovieDetails = ({ isScrolling, movie }) => {
     return (
-        <div   className="item-details-container">
+        <div  className={`${ isScrolling ? 'isScrolling' : null}   item-details-container`}>
             <div style={{
             backgroundImage: `url(${movie.imageUrl})`
             }} className='item-details-image-container'>
