@@ -37,10 +37,13 @@
     }
 
     .movie-name {
-        width: 100%;
+        width: 80%;
         height: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
+        white-space: nowrap;
+        text-overflow: clip;
+        overflow: hidden;
     }
 }

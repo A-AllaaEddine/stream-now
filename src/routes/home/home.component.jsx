@@ -1,27 +1,41 @@
 import './home.styles.scss';
 
+import Client from 'stremio-addon-client';
 
 import { useState } from 'react';
+
 
 import MovieDetails from '../../components/movie-details/movie-details.component';
 import MovieCard from '../../components/movie-card/movie-card.component';
 import { useEffect } from 'react';
-import { useContext } from 'react';
-import { MoviesContext } from '../../context/movies.context';
-
+import { useSelector } from 'react-redux';
+import { selectCatalogMetas, selectIsLoading, selectMoviesCatalogs, selectSeriesCatalogs } from '../../store/catalog/catalog.selectors';
+import { useDispatch } from 'react-redux';
+import { fetchCatalogMetasStart } from '../../store/catalog/catalog.actions';
 
 
 
 
 const Home = () => {
-    const [ localMovies, setLocalMovies ] = useState([]);
     const [ selectedMovie, setSelectedMovie ] = useState({});
     const [ isScrolling, setIsScrolling ] = useState(false);
 
-    const { movies } = useContext(MoviesContext)
+    const MoviesResource = useSelector(selectMoviesCatalogs);
+    const SeriesResource = useSelector(selectSeriesCatalogs);
+    const CatalogMetas = useSelector(selectCatalogMetas);
+    const MoviesMetas = CatalogMetas[0];
+    const SeriesMetas = CatalogMetas[1];
+    const isLoading = useSelector(selectIsLoading);
+
+    const dispatch = useDispatch();
+    const url = 'https://3bf59d9737bf-mycimaaddonbylazydzv.baby-beamup.club/manifest.json';
+
+    const moviesData = {resource: 'catalog', type: 'movie', id: `${MoviesResource[0] && MoviesResource[0].id}`, extra: {}};
+    const seriesData = {resource: 'catalog', type: 'series', id: `${SeriesResource[0] && SeriesResource[0].id}`, extra: {}};
+    
 
     useEffect(() => {
-        setLocalMovies(movies);
+        dispatch(fetchCatalogMetasStart({url, moviesData, seriesData}));
     }, [])
 
     const handleScroll = (event) => {
@@ -40,47 +54,46 @@ const Home = () => {
     }
 
     return (
-        <div className='home-container'>
+        <>
+        {
+            !isLoading ? (
+                <div className='home-container'>
             <MovieDetails isScrolling={isScrolling}  movie={selectedMovie} />
             <div className={`${isScrolling ? 'isScrolling' : null} items-container`} onScroll={handleScroll}>
-                <div className='movies-container'>
+                {MoviesMetas &&
+                    <div className='movies-container'>
                     <h2>Movies - Popular</h2>
                     <div className='movies-list-container'>
                         {
-                            localMovies.filter((_, idx) => idx < 20).map((movie) => {
+                            MoviesMetas.filter((_, idx) => idx < 20).map((movie) => {
                                 return (
                                     <MovieCard key={movie.id} movie={movie} selectItem={selectItem} />
                                 )
                             })
                         }
                     </div>
-                </div>
-                <div className='movies-container'>
+                </div>}
+                {SeriesMetas &&
+                    <div className='movies-container'>
                     <h2>Series - Popular</h2>
                     <div className='movies-list-container'>
                         {
-                            localMovies.filter((_, idx) => idx < 20).map((movie) => {
+                            SeriesMetas.filter((_, idx) => idx < 20).map((movie) => {
                                 return (
                                     <MovieCard key={movie.id} movie={movie} selectItem={selectItem} />
                                 )
                             })
                         }
                     </div>
-                </div>
-                <div className='movies-container'>
-                    <h2>Series - Popular</h2>
-                    <div className='movies-list-container'>
-                        {
-                            localMovies.filter((_, idx) => idx < 20).map((movie) => {
-                                return (
-                                    <MovieCard key={movie.id} movie={movie} selectItem={selectItem} />
-                                )
-                            })
-                        }
-                    </div>
-                </div>
+                </div>}
             </div>
         </div>
+            ) : (
+                <div className='home-container'> null
+                </div>
+            )
+        }
+        </>
     )
 }
 

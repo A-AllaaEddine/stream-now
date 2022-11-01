@@ -2,17 +2,28 @@ import './navigation.styles.scss';
 
 import { Outlet, Link } from 'react-router-dom';
 
-import { ReactComponent as AccountIcon } from '../../assets/Account circle.svg';
 import { ReactComponent as Extention } from '../../assets/Extension.svg';
-import { ReactComponent as Fullscreen } from '../../assets/Fullscreen.svg';
 import { ReactComponent as Search } from '../../assets/Search.svg';
 import Feed from '../../assets/Feed.png';
 import Discover from '../../assets/Discover.png';
 import Library from '../../assets/Library.png';
 import StremioLogo from '../../assets/StremioLogo2.png';
 import Settings from '../../assets/setting.png';
+import { fetchCatalogsAndResourcesStart } from '../../store/catalog/catalog.actions';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+
+
 
 const Navigation = () => {
+    const dispatch = useDispatch();
+    const url = 'https://3bf59d9737bf-mycimaaddonbylazydzv.baby-beamup.club/manifest.json';
+    
+    useEffect(() => {
+        dispatch(fetchCatalogsAndResourcesStart(url));
+    }, []);
+
+
     return (
         <>
             <div className='navigation-container'>

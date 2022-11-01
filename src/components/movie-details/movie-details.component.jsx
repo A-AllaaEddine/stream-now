@@ -4,14 +4,14 @@ const MovieDetails = ({ isScrolling, movie }) => {
     return (
         <div  className={`${ isScrolling ? 'isScrolling' : null}   item-details-container`}>
             <div style={{
-            backgroundImage: `url(${movie.imageUrl})`
+            backgroundImage: `url(${movie.poster})`
             }} className='item-details-image-container'>
                 {/* <img src={selectedMovie.imageUrl} alt='' className='item-details-image'/> */}
             </div>
             <p className='item-title'>{movie.name && movie.name}</p>
             <p className='item-genre'>{movie.genre && movie.genre}</p>
             <div className='item-year-container'>
-                <p>{movie.year && movie.year}</p>
+                <p>{movie.releaseInfo && movie.releaseInfo}</p>
             </div>
             {
                 movie.director && (

@@ -2,50 +2,31 @@ import './discover.styles.scss';
 
 import { Link } from 'react-router-dom';
 
-import { Movies, Series } from '../../utils/data';
+import { Movies } from '../../utils/data';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useContext } from 'react';
-import { MoviesContext } from '../../context/movies.context';
 
 import MovieDetails from '../../components/movie-details/movie-details.component';
 import MovieCard from '../../components/movie-card/movie-card.component';
+import { useSelector } from 'react-redux';
+import { selectCatalogMetas, selectResources } from '../../store/catalog/catalog.selectors';
 
 
-
-const Categories = [
-     {
-        id: 0,
-        name: 'Movies',
-     },{
-        id: 0,
-        name: 'Series',
-     },{
-        id: 0,
-        name: 'Channels',
-     },{
-        id: 0,
-        name: 'TV Channels',
-     }
-]
 
 const Discover = () => {
-    const [ localMovies, setLocalMovies ] = useState([]);
     const [ clicked, setClicked ] = useState(false);
     const [ selectedMovie, setSelectedMovie ] = useState(Movies[0]);
     const [ isScrolling, setIsScrolling ] = useState(false);
-    const [ resources, setResources ] = useState([]);
-    const [ catalogs, setCatalogs ] = useState([]);
+    const catalogMetas = useSelector(selectCatalogMetas);
+    const Resources = useSelector(selectResources);
+    console.log(Resources);
 
-    const { movies } = useContext(MoviesContext)
 
 
 
     useEffect(() => {
-        setLocalMovies(movies);
     }, [])
 
-    console.log(resources, catalogs);
 
     const selectItem = (movieItem) => {
         setSelectedMovie(movieItem);
@@ -91,7 +72,7 @@ const Discover = () => {
             </div>
             <div className={`${isScrolling ? 'isScrolling' : null} items-container`} onScroll={handleScroll}>
                     {
-                        localMovies.map((movie) => {
+                        catalogMetas.map((movie) => {
                             return (
                                 <MovieCard key={movie.id}  movie={movie} selectItem={selectItem}/>
                             )
