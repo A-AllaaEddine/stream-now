@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react';
 
 import MovieDetails from '../../components/movie-details/movie-details.component';
 import MovieCard from '../../components/movie-card/movie-card.component';
+import Spinner from '../../components/Spinner/spinner.component';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCatalogMetas, selectIsLoading, selectDefaultTypesCatalogs, selectAddosnUrls } from '../../store/catalog/catalog.selectors';
 import { fetchCatalogMetasStart } from '../../store/catalog/catalog.actions';
@@ -23,8 +25,6 @@ const Home = () => {
     const AddonUrls = useSelector(selectAddosnUrls);
 
     const CatalogMetas = useSelector(selectCatalogMetas);
-    // const MoviesMetas = CatalogMetas && CatalogMetas[0][0];
-    // const SeriesMetas = CatalogMetas && CatalogMetas[0][1];
     const isLoading = useSelector(selectIsLoading);
 
     const dispatch = useDispatch();
@@ -101,7 +101,8 @@ const Home = () => {
                     </div>
                 </div>
             ) : (
-                <div className='home-container'> null
+                <div className='spinner-container'> 
+                    <Spinner />
                 </div>
             )
         }

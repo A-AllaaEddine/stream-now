@@ -28,7 +28,7 @@ export const GetAddonData = async (url) => {
     const manifest = await Client.detectFromURL(url)
     .then((res) => {
         // console.log(res.addon.manifest);
-        return res.addon.manifest;
+        return { addonUrl: url, data: res.addon.manifest};
     })
 
     // const manifests = await Promise.all(urls.map(u=>fetch(u)))

@@ -43,15 +43,17 @@ export const selectAddonsTypesCatalogs = createSelector(
     (AddonData) => AddonData.map(addon => {
         // console.log(addon.catalogs);
 
-        const typeMovies = addon.catalogs.filter(movie => {
+        const typeMovies = addon.data.catalogs.filter(movie => {
                 return movie.type === 'movie';
         });
         
-        const typeSeries = addon.catalogs.filter(serie => {
+        const typeSeries = addon.data.catalogs.filter(serie => {
                 return serie.type === 'series'
         });
+        // const AddonUrl = addon.url
 
-        return {movie: typeMovies, series: typeSeries};
+        // console.log({movie: typeMovies, series: typeSeries})
+        return {addonUrl: addon.addonUrl, movie: typeMovies, series: typeSeries};
     })
 )
 
@@ -59,11 +61,11 @@ export const selectDefaultTypesCatalogs = createSelector(
     [selectAddonsData],
     (AddonData) => AddonData.map(addon => {
         // console.log(addon.catalogs);
-        const typeMovies = addon.catalogs.filter(movie => {
+        const typeMovies = addon.data.catalogs.filter(movie => {
                 return movie.type === 'movie';
         });
         
-        const typeSeries = addon.catalogs.filter(serie => {
+        const typeSeries = addon.data.catalogs.filter(serie => {
                 return serie.type === 'series'
         });
 

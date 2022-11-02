@@ -46,25 +46,20 @@ export function* fetchCatalogMetasAsync(action) {
 
 // fetch catalog from url based on types (movie, series...)
 export function* fetchTypeCatalogsAsync(action) {
-    const { AddonUrls, selectedType, selectedId } = action.payload;
+    const { selectedAddonUrl, selectedType, selectedId } = action.payload;
 
-    if(AddonUrls.length <= 0 || !selectedId || !selectedId) {
+    if(!selectedAddonUrl || !selectedId || !selectedId) {
         return []
     }
+
     try {
-        var MetaData = [];
-        for (let i=0; i< AddonUrls.length; i++) {
-            var data = [];
-            const moviesData = {resource: 'catalog', type: selectedType, id: selectedId, extra: {}};
-            console.log(moviesData);
-            data.push(yield call(GetCatalogFromAddon, AddonUrls[i], moviesData));
-            MetaData.push(data);
-        }
-        // console.log(MetaData);
-        yield put(fetchCTypeatalogSuccess(MetaData));
+        const moviesData = {resource: 'catalog', type: selectedType, id: selectedId, extra: {}};
+        const TypeCatalogs = yield call(GetCatalogFromAddon, selectedAddonUrl, moviesData);
+        yield put(fetchCTypeatalogSuccess(TypeCatalogs));
     }catch(error) {
         yield put(fetchCTypeatalogFailed(error));
     }
+
 }
 
 
