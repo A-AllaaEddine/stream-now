@@ -24,3 +24,16 @@ export const fetchCatalogsAndResourcesSuccess = (catalogsAndResources) => {
 export const fetchCatalogsAndResourcesFailed = (error) => {
     return createAction(CATALOG_ACTION_TYPE.FETCH_CATALOGS_AND_RESOURCES_FAILED, error)
 }
+
+
+export const fetchAddonDataStart = (urls) => {
+    return createAction(CATALOG_ACTION_TYPE.FETCH_ADDON_DATA_START, urls)
+}
+
+export const fetchAddonDataSuccess = (data) => {
+    return createAction(CATALOG_ACTION_TYPE.FETCH_ADDON_DATA_SUCCESS, data)
+}
+
+export const fetchAddonDataFailed = (error) => {
+    return createAction(CATALOG_ACTION_TYPE.FETCH_ADDON_DATA_FAILED, error)
+}

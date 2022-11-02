@@ -11,22 +11,34 @@ export const GetCatalogFromAddon = async (url, data) => {
 
     return Data;
 }
+
 export const GetCatalogsAndResources = async (url) => {
     const Data =  await Client.detectFromURL(url)
     .then (res => { 
         // console.log([res.addon.manifest.resources, res.addon.manifest.catalogs]);
-        
+        // console.log(res.addon.manifest);
         return [res.addon.manifest.resources, res.addon.manifest.catalogs]
     })
 
     return Data;
 }
 
-export const GetManifest = async (url) => {
+export const GetAddonData = async (url) => {
+
     const manifest = await Client.detectFromURL(url)
-    .then (res => {
+    .then((res) => {
+        // console.log(res.addon.manifest);
         return res.addon.manifest;
     })
+
+    // const manifests = await Promise.all(urls.map(u=>fetch(u)))
+    // .then (response => Promise.all(response.map((res) => {
+
+    //     return {
+    //         manifest: res.addon.manifest
+    //     }
+    // } ) 
+    // ))
 
     return manifest;
 }

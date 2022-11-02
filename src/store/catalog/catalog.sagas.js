@@ -1,24 +1,42 @@
 import { takeLatest, all, call, put } from 'redux-saga/effects';
 
-import { GetCatalogFromAddon, GetCatalogsAndResources } from '../../utils/addonUtils';
+import { GetCatalogFromAddon, GetCatalogsAndResources, GetAddonData } from '../../utils/addonUtils';
 
 import { 
     fetchCatalogMetasFailed,
     fetchCatalogMetasSuccess,
     fetchCatalogsAndResourcesSuccess,
-    fetchCatalogsAndResourcesFailed
+    fetchCatalogsAndResourcesFailed,
+    fetchAddonDataFailed,
+    fetchAddonDataSuccess
 } from './catalog.actions';
 
 import { CATALOG_ACTION_TYPE } from './catalog.types';
 
+
+
 export function* fetchCatalogMetasAsync(action) {
-    // console.log(action.payload);
-    const { url, moviesData, seriesData } = action.payload;
-    // console.log(data);
+    const { AddonUrls, typeCatalogs } = action.payload;
+    // console.log(typeCatalogs);
+    // const { moviesData, seriesData } = typeCatalogs;
+    if (typeCatalogs.length <= 0 || AddonUrls.length <= 0) {
+        return [];
+    };
+
     try {
-        const CatalogMetasMovies = yield call(GetCatalogFromAddon, url, moviesData);
-        const CatalogMetasSeries = yield call(GetCatalogFromAddon, url, seriesData);
-        yield put(fetchCatalogMetasSuccess([CatalogMetasMovies, CatalogMetasSeries]));
+        var MetaData = [];
+        for (let i=0; i< AddonUrls.length; i++) {
+            var t = typeCatalogs[i];
+            var data = [];
+            for (let j=0; j< t.length; j++) {
+                const moviesData = {resource: 'catalog', type: `${t[j].type}`, id: `${t && t[j].id}`, extra: {}};
+                // console.log(moviesData);
+                data.push(yield call(GetCatalogFromAddon, AddonUrls[i], moviesData));
+            }
+            MetaData.push(data);
+        }
+        // console.log(MetaData);
+        yield put(fetchCatalogMetasSuccess(MetaData));
     }catch(error) {
         yield put(fetchCatalogMetasFailed(error));
     }
@@ -37,6 +55,25 @@ export function* fetchCatalogsAndResourcesAsync(action) {
 
 
 
+export function* fetchAddonDataAsync(action) {
+    const urls = action.payload;
+    try {
+        var AddonData = [];
+        for (var url of urls) {
+            AddonData.push(yield call(GetAddonData, url));
+        }
+        // console.log(AddonData);
+        yield put(fetchAddonDataSuccess(AddonData));
+    } catch (error) {
+        yield put(fetchAddonDataFailed(error));
+    }
+}
+
+
+export function* onFetchAddonData () {
+    yield takeLatest(CATALOG_ACTION_TYPE.FETCH_ADDON_DATA_START, fetchAddonDataAsync)
+}
+
 
 export function* onFetchCatalogMetas() {
     yield takeLatest(CATALOG_ACTION_TYPE.FETCH_CATALOG_METAS_START, fetchCatalogMetasAsync);
@@ -51,6 +88,7 @@ export function* onFetchCatalogsAndResources() {
 export function* catalogSaga() {
     yield all([
         call(onFetchCatalogMetas),
-        call(onFetchCatalogsAndResources)
+        call(onFetchCatalogsAndResources),
+        call(onFetchAddonData)
     ])
 }

@@ -1,7 +1,7 @@
 
 
-export const  isSupported = (resources, types) => {
-    if (resources === 'catalog' && Array.isArray(manifest.catalogs)) {
+export const  isSupported = (manifest, resources, type) => {
+    if (manifest.resources === 'catalog' && Array.isArray(manifest.catalogs)) {
 		return manifest.catalogs.some(function(c) {
 			return c.type === type && c.id === id
 		})

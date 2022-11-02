@@ -17,13 +17,12 @@
     .items-container {
 
         width: 100%;
-        height: 50%;
+        height: 99%;
         display: flex;
         flex-direction: column;
-        overflow-y: auto;
+        overflow-y: scroll;
         gap: 10px;
 
-        overflow-y: auto;
         overscroll-behavior-y: contain;
         scroll-snap-type: y mandatory;
         scroll-padding-inline: auto;
@@ -33,7 +32,11 @@
         transition: 0.5s;
 
         &.isScrolling {
-            height: 80%;
+            height: 99%;
+        }
+
+        &.clicked {
+            height: 50%;
         }
 
         &::-webkit-scrollbar {
@@ -62,61 +65,68 @@
             padding-left: 20px;
         }
 
-        .movies-container {
+        .addon-items-container {
             width: 100%;
-            height: 450px;
+            height: auto;
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
-            align-items: flex-start;
-            // scroll-snap-align: start;
-            padding-top: 20px;
-            padding-inline: 10px;
-    
-    
-    
-            .movies-list-container {
+
+            .movies-container {
                 width: 100%;
-                height: 100%;
+                height: 450px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: flex-start;
+                // scroll-snap-align: start;
                 padding-top: 20px;
-                overflow-y: hidden;
-    
-                display: grid;
-                gap: 1px;
-                grid-auto-flow: column;
-    
-                overflow-x: scroll;
-                overscroll-behavior-inline: contain;
-                scroll-snap-type: inline mandatory;
-                scroll-padding-inline: auto;
-    
-    
-                &::-webkit-scrollbar {
-                    height: 10px;
-                }
+                padding-inline: 10px;
         
-                &::-webkit-scrollbar-track {
-                    box-shadow: inset 0 0 6px #201F32;
-                }
         
-                &::-webkit-scrollbar-thumb {
-                    background-color: #3D3F95;
-                    outline: 1px solid black;
-                    border-radius: 10px;
-                    
-                    &:hover {
-                        background-color: #625FA5;
+        
+                .movies-list-container {
+                    width: 100%;
+                    height: 100%;
+                    padding-top: 20px;
+                    overflow-y: hidden;
+        
+                    display: grid;
+                    gap: 1px;
+                    grid-auto-flow: column;
+        
+                    overflow-x: scroll;
+                    overscroll-behavior-inline: contain;
+                    scroll-snap-type: inline mandatory;
+                    scroll-padding-inline: auto;
+        
+        
+                    &::-webkit-scrollbar {
+                        height: 10px;
                     }
+            
+                    &::-webkit-scrollbar-track {
+                        box-shadow: inset 0 0 6px #201F32;
+                    }
+            
+                    &::-webkit-scrollbar-thumb {
+                        background-color: #3D3F95;
+                        outline: 1px solid black;
+                        border-radius: 10px;
+                        
+                        &:hover {
+                            background-color: #625FA5;
+                        }
+                    }
+                    
+        
+                    &::-webkit-scrollbar-button {
+                        width: 10px;
+                    }
+                    
+        
                 }
-                
-    
-                &::-webkit-scrollbar-button {
-                    width: 10px;
-                }
-                
-    
+        
             }
-    
         }
         
     }
