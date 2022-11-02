@@ -1,3 +1,4 @@
+
 import { createSelector } from "reselect";
 export const selectCatalog = (state) => state.catalog;
 
@@ -5,6 +6,11 @@ export const selectCatalogMetas = createSelector(
     [selectCatalog],
     (catalog) => catalog.catalogMetas
 )
+export const selectTypeCatalog = createSelector(
+    [selectCatalog],
+    (catalog) => catalog.TypeCatalogs
+)
+
 
 export const selectAddonsData = createSelector(
     [selectCatalog],
@@ -22,16 +28,34 @@ export const selectCatalogs = createSelector(
 )
 
 
-export const selectResources = createSelector(
-    [selectCatalog],
-    (catalog) => catalog.resources
+export const selectAddonsResources = createSelector(
+    [selectAddonsData],
+    (AddonData) => AddonData.resources
 )
+
 export const selectAddonCatalogs = createSelector(
     [selectCatalog],
     (catalog) => catalog.addonCatalogs
 )
 
-export const selectTypesCatalogs = createSelector(
+export const selectAddonsTypesCatalogs = createSelector(
+    [selectAddonsData],
+    (AddonData) => AddonData.map(addon => {
+        // console.log(addon.catalogs);
+
+        const typeMovies = addon.catalogs.filter(movie => {
+                return movie.type === 'movie';
+        });
+        
+        const typeSeries = addon.catalogs.filter(serie => {
+                return serie.type === 'series'
+        });
+
+        return {movie: typeMovies, series: typeSeries};
+    })
+)
+
+export const selectDefaultTypesCatalogs = createSelector(
     [selectAddonsData],
     (AddonData) => AddonData.map(addon => {
         // console.log(addon.catalogs);
@@ -47,27 +71,6 @@ export const selectTypesCatalogs = createSelector(
     })
 )
 
-export const selectSeriesCatalogs = createSelector(
-    [selectAddonsData],
-    (AddonData) => AddonData.catalogs.filter(movie => {
-        return movie.type === 'series'
-    })
-)
-export const selectMoviesDefaultCatalog = createSelector(
-    [selectAddonsData],
-    (AddonData) => AddonData.map((addon) => 
-    addon.catalogs.filter(cat => {
-        return cat.type === 'movie'
-    })[0])
-)
-
-export const selectSeriesDefaultCatalog = createSelector(
-    [selectAddonsData],
-    (AddonData) => AddonData.map((addon) => 
-    addon.catalogs.filter(cat => {
-        return cat.type === 'series'
-    })[0])
-)
 
 export const selectIsLoading = createSelector(
     [selectCatalog],

@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import MovieDetails from '../../components/movie-details/movie-details.component';
 import MovieCard from '../../components/movie-card/movie-card.component';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCatalogMetas, selectIsLoading, selectTypesCatalogs, selectAddosnUrls } from '../../store/catalog/catalog.selectors';
+import { selectCatalogMetas, selectIsLoading, selectDefaultTypesCatalogs, selectAddosnUrls } from '../../store/catalog/catalog.selectors';
 import { fetchCatalogMetasStart } from '../../store/catalog/catalog.actions';
 
 
@@ -19,7 +19,7 @@ const Home = () => {
     const [clicked, setClicked] = useState(false);
 
     
-    const typeCatalogs = useSelector(selectTypesCatalogs);
+    const typeCatalogs = useSelector(selectDefaultTypesCatalogs);
     const AddonUrls = useSelector(selectAddosnUrls);
 
     const CatalogMetas = useSelector(selectCatalogMetas);

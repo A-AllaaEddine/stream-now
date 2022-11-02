@@ -8,9 +8,8 @@ const CATALOG_INITIAL_STATE = {
     addonResources: [],
     defaultResources: [],
     AddonsData: [],
+    TypeCatalogs: [],
     AddonsUrls: [
-        'https://3bf59d9737bf-mycimaaddonbylazydzv.baby-beamup.club/manifest.json',
-        'https://3bf59d9737bf-mycimaaddonbylazydzv.baby-beamup.club/manifest.json',
         'https://3bf59d9737bf-mycimaaddonbylazydzv.baby-beamup.club/manifest.json',
         'https://3bf59d9737bf-mycimaaddonbylazydzv.baby-beamup.club/manifest.json',
         'https://3bf59d9737bf-mycimaaddonbylazydzv.baby-beamup.club/manifest.json',
@@ -28,6 +27,7 @@ export const catalogReducer = (state = CATALOG_INITIAL_STATE, action) => {
         case CATALOG_ACTION_TYPE.FETCH_CATALOG_METAS_START:
         case CATALOG_ACTION_TYPE.FETCH_CATALOGS_AND_RESOURCES_START:
         case CATALOG_ACTION_TYPE.FETCH_ADDON_DATA_START:
+        case CATALOG_ACTION_TYPE.FETCH_TYPE_CATALOGS_START:
             return {
                 ...state,
                 isLoading: true
@@ -35,6 +35,7 @@ export const catalogReducer = (state = CATALOG_INITIAL_STATE, action) => {
         case CATALOG_ACTION_TYPE.FETCH_CATALOG_METAS_FAILED:
         case CATALOG_ACTION_TYPE.FETCH_CATALOGS_AND_RESOURCES_FAILED:
         case CATALOG_ACTION_TYPE.FETCH_ADDON_DATA_FAILED:
+        case CATALOG_ACTION_TYPE.FETCH_TYPE_CATALOGS_FAILED:
             return {
                 ...state,
                 error: payload,
@@ -57,6 +58,12 @@ export const catalogReducer = (state = CATALOG_INITIAL_STATE, action) => {
             return {
                 ...state,
                 AddonsData: payload,
+                isLoading: false
+            }
+        case CATALOG_ACTION_TYPE.FETCH_TYPE_CATALOGS_SUCCESS:
+            return {
+                ...state,
+                TypeCatalogs: payload,
                 isLoading: false
             }
         default:

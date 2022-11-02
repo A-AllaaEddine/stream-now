@@ -13,6 +13,7 @@ import './App.scss';
 const App = () => {
   const AddonsUrls = useSelector(selectAddosnUrls);
   const dispatch = useDispatch();
+  const url = 'https://3bf59d9737bf-mycimaaddonbylazydzv.baby-beamup.club/manifest.json';
 
   useEffect(() => {
     dispatch(fetchAddonDataStart(AddonsUrls));

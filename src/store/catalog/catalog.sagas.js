@@ -8,13 +8,15 @@ import {
     fetchCatalogsAndResourcesSuccess,
     fetchCatalogsAndResourcesFailed,
     fetchAddonDataFailed,
-    fetchAddonDataSuccess
+    fetchAddonDataSuccess,
+    fetchCTypeatalogSuccess,
+    fetchCTypeatalogFailed
 } from './catalog.actions';
 
 import { CATALOG_ACTION_TYPE } from './catalog.types';
 
 
-
+// fetch catalog for all type from all addons for home screen display
 export function* fetchCatalogMetasAsync(action) {
     const { AddonUrls, typeCatalogs } = action.payload;
     // console.log(typeCatalogs);
@@ -42,6 +44,31 @@ export function* fetchCatalogMetasAsync(action) {
     }
 }
 
+// fetch catalog from url based on types (movie, series...)
+export function* fetchTypeCatalogsAsync(action) {
+    const { AddonUrls, selectedType, selectedId } = action.payload;
+
+    if(AddonUrls.length <= 0 || !selectedId || !selectedId) {
+        return []
+    }
+    try {
+        var MetaData = [];
+        for (let i=0; i< AddonUrls.length; i++) {
+            var data = [];
+            const moviesData = {resource: 'catalog', type: selectedType, id: selectedId, extra: {}};
+            console.log(moviesData);
+            data.push(yield call(GetCatalogFromAddon, AddonUrls[i], moviesData));
+            MetaData.push(data);
+        }
+        // console.log(MetaData);
+        yield put(fetchCTypeatalogSuccess(MetaData));
+    }catch(error) {
+        yield put(fetchCTypeatalogFailed(error));
+    }
+}
+
+
+// fetch catalog and resources from addon url
 export function* fetchCatalogsAndResourcesAsync(action) {
     const  url  = action.payload;
     // console.log(data);
@@ -54,7 +81,7 @@ export function* fetchCatalogsAndResourcesAsync(action) {
 }
 
 
-
+// fetch addon data based on url
 export function* fetchAddonDataAsync(action) {
     const urls = action.payload;
     try {
@@ -70,6 +97,9 @@ export function* fetchAddonDataAsync(action) {
 }
 
 
+
+
+// listeners
 export function* onFetchAddonData () {
     yield takeLatest(CATALOG_ACTION_TYPE.FETCH_ADDON_DATA_START, fetchAddonDataAsync)
 }
@@ -77,6 +107,10 @@ export function* onFetchAddonData () {
 
 export function* onFetchCatalogMetas() {
     yield takeLatest(CATALOG_ACTION_TYPE.FETCH_CATALOG_METAS_START, fetchCatalogMetasAsync);
+}
+
+export function* onFetchTypeCatalogs() {
+    yield takeLatest(CATALOG_ACTION_TYPE.FETCH_TYPE_CATALOGS_START, fetchTypeCatalogsAsync);
 }
 
 export function* onFetchCatalogsAndResources() {
@@ -89,6 +123,7 @@ export function* catalogSaga() {
     yield all([
         call(onFetchCatalogMetas),
         call(onFetchCatalogsAndResources),
-        call(onFetchAddonData)
+        call(onFetchAddonData),
+        call(onFetchTypeCatalogs)
     ])
 }
