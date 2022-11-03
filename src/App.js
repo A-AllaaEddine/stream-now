@@ -3,7 +3,9 @@ import { Route, Routes } from 'react-router-dom';
 import Navigation from './routes/navigation/navigation.component';
 import Home from './routes/home/home.component';
 import Discover from './routes/discover/dicover.component';
-import { fetchCatalogsAndResourcesStart, fetchAddonDataStart } from './store/catalog/catalog.actions';
+import MovieMeta from './routes/movie-meta/movie-meta.component';
+
+import { fetchAddonDataStart } from './store/catalog/catalog.actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { selectAddosnUrls } from './store/catalog/catalog.selectors';
@@ -17,7 +19,6 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchAddonDataStart(AddonsUrls));
-    // dispatch(fetchCatalogsAndResourcesStart(url));
 }, []);
   return (
     <div className='App'>
@@ -25,6 +26,7 @@ const App = () => {
         <Route path='/' element={<Navigation />}>
           <Route index element={<Home />} />
           <Route path='discover' element={<Discover />} />
+          <Route path='description' element={<MovieMeta />} />
         </Route>
       </Routes>
     </div>

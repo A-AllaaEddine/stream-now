@@ -93,6 +93,9 @@
                     margin-left: 10px;
 
         
+                    &.checked {
+                        color: #7e7ace;
+                    }
     
                     &:hover {
                         color: #625FA5;
@@ -154,6 +157,10 @@
                     text-overflow: clip;
                     margin-left: 10px;
     
+
+                    &.checked {
+                        color: #7e7ace;
+                    }
     
                     &:hover {
                         color: #625FA5;
@@ -193,7 +200,7 @@
         }
 
         &.clicked {
-            height: 50%;
+            height: 30%;
         }
 
         &::-webkit-scrollbar {
