@@ -59,12 +59,34 @@
 
     }
     
-    .movie-info {
+    
+    .blur-container {
         width: 70%;
         height: 40%;
-        background-color: red;
-        // filter: blur(8px);
-        // -webkit-filter: blur(8px);
+        position: absolute;
+        bottom: -5px;
+        left: -5px;
+        z-index: 0;
+        // background-color: red;
+        background-color: rgba(0, 0, 0, 0.81);
+        background-position: fixed;
+        
+        // filter: blur(50px);
+        // backdrop-filter: blur(10px);
+    }
+    
+    .movie-info {
+        width: 80%;
+        height: 35%;
+        z-index: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        position: relative;
+        
+        // -webkit-filter: blur(2px);
+
+        p {
+            z-index: 1;
+        }
 
         .item-title {
             margin-top: 10px;
@@ -73,19 +95,19 @@
         }
     
     
-        .item-genre {
-            font-size: 16px;
-            font-weight: bold;
-        }
+        
     
         .item-year-time-genre-container {
-            width: auto;
+            width: 100%;
             display: flex;
+            align-items: center;
             margin-left: 20px;
 
-            font-size: 20px;
+            font-size: 15px;
             font-weight: bold;
             width: 200px;
+            white-space: nowrap;
+
 
             p {
                 margin-left: 10px;
@@ -101,21 +123,41 @@
                 font-weight: bold;
             }
         }
+
         .item-actors-container {
-            font-size: 16px;
+            width: 100%;
+            font-size: 15px;
     
             .item-lead-actors {
-                font-size: 18px;
+                font-size: 15px;
                 font-weight: bold;
             }
         }
     
         .item-summary-container {
-            font-size: 16px;
-            width: 550px;
+            font-size: 15px;
+            width: 80%;
+            margin-left: 30px;
+            overflow-y: hidden;
             .item-summary {
-                font-size: 18px;
+                font-size: 16px;
                 font-weight: bold;
+            }
+
+        }
+
+        .watch-now {
+            width: 130px;
+            height: 40px;
+            border-radius: 1px;
+            background-color: #7e7ace;
+            border: none;
+            position: absolute;
+            right: 3px;
+            top: 3px;
+
+            &:hover {
+                cursor: pointer;
             }
         }
     }
@@ -124,15 +166,4 @@
 
 
 
-    .watch-now {
-        width: 130px;
-        height: 40px;
-        border-radius: 10px;
-        background-color: #7e7ace;
-        border: none;
-        box-shadow: 3px 3px #58558f;
-        position: absolute;
-        left: 35%;
-        bottom: 15px;
-    }
 }

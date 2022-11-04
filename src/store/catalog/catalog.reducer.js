@@ -10,9 +10,10 @@ const CATALOG_INITIAL_STATE = {
     AddonsData: [],
     TypeCatalogs: [],
     AddonsUrls: [
-        'https://3bf59d9737bf-mycimaaddonbylazydzv.baby-beamup.club/manifest.json',
+        'https://v3-cinemeta.strem.io/manifest.json',
         'https://1fe84bc728af-imdb-catalogs.baby-beamup.club/manifest.json',
-        'https://2ecbbd610840-trakt.baby-beamup.club/manifest.json'
+        'https://2ecbbd610840-trakt.baby-beamup.club/manifest.json',
+        'https://3bf59d9737bf-mycimaaddonbylazydzv.baby-beamup.club/manifest.json',
 ],
     isLoading: false,
     error: null
