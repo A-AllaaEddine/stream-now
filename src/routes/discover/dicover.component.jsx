@@ -22,10 +22,10 @@ const Discover = () => {
     const [ selectedMovie, setSelectedMovie ] = useState({});
     const [ isScrolling, setIsScrolling ] = useState(false);
     const [ selectedType, setSelectedType ] = useState("movie");
-    const [ selectedSubType, setSelectedSubType ] = useState("Mycima All Movies");
+    const [ selectedSubType, setSelectedSubType ] = useState("Popular");
     const [ subTypes, setSubTypes ] = useState([]);
-    const [ selectedId, setSelectedId ] = useState("MCmovies");
-    const [ selectedAddonUrl, setSelectedAddonUrl ] = useState("https://3bf59d9737bf-mycimaaddonbylazydzv.baby-beamup.club/manifest.json");
+    const [ selectedId, setSelectedId ] = useState("top");
+    const [ selectedAddonUrl, setSelectedAddonUrl ] = useState("https://v3-cinemeta.strem.io/manifest.json");
     const [ clicked, setClicked ] = useState(false);
     const [ types, setTypes ] = useState(false);
 
@@ -35,7 +35,7 @@ const Discover = () => {
     const TypeCatalogs = useSelector(selectTypeCatalog);
     const isLoading = useSelector(selectIsLoading);
     const dispatch = useDispatch();
-    // console.log(DefaultAddonTypes);
+    // console.log(TypeCatalogs);
 
   
     useEffect(() => {
@@ -101,11 +101,11 @@ const Discover = () => {
         switch (type) {
             case "movie":
                 setSelectedId("MCmovies");
-                setSelectedAddonUrl("https://3bf59d9737bf-mycimaaddonbylazydzv.baby-beamup.club/manifest.json")
+                setSelectedAddonUrl("https://v3-cinemeta.strem.io/manifest.json'")
                 break;
             case "series":
                 setSelectedId("MCseries");
-                setSelectedAddonUrl("https://3bf59d9737bf-mycimaaddonbylazydzv.baby-beamup.club/manifest.json")
+                setSelectedAddonUrl("https://v3-cinemeta.strem.io/manifest.json'")
                 break;
             default:
                 setSelectedId(id)
@@ -154,7 +154,7 @@ const Discover = () => {
                         {!isLoading ?
                             (<div className={`${isScrolling ? 'isScrolling' : null} ${clicked ? 'clicked': ''} items-container`} onScroll={handleScroll}>
                                     {TypeCatalogs &&
-                                        TypeCatalogs.map((movie) => {
+                                        TypeCatalogs.filter((_, idx) => idx > 0).map((movie) => {
                                             return (
                                                 <MovieCard key={movie.id}  movie={movie} selectItem={selectItem}/>
                                             )

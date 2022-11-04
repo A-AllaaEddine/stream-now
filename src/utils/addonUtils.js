@@ -2,13 +2,17 @@ import Client from 'stremio-addon-client';
 
 export const GetCatalogFromAddon = async (url, data) => {
     const { resource, type, id, extra } = data;
+    var addonName;
     const Data =  await Client.detectFromURL(url)
     .then (res => { 
-        // console.log(res.addon.manifest.resources);
+        addonName = res.addon.manifest.name;
+        // console.log(res.addon.manifest.name);
         // console.log(res.addon.manifest.catalogs);
         return res.addon.get(resource, type, id)})
     .then (res => {return res.metas});
 
+    // console.log(addonName);
+    Data.unshift({addonName: addonName});
     return Data;
 }
 

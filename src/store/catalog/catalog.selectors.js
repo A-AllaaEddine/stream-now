@@ -136,7 +136,7 @@ export const selectDefaultTypesCatalogs = createSelector(
             })
             types.push({addonUrl: addonUrl, ...type[0]});
         }
-        console.log(types);
+        // console.log(types);
 
         // console.log([typeMovies[0], typeSeries[0]])
         return types;
