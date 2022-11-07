@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { fetchMovieMetaStart, fetchMovieStreamsStart } from '../../store/catalog/catalog.actions';
-import { selectMovieMetas, selectMovieStreams, selectIsLoading } from '../../store/catalog/catalog.selectors';
+import { selectMovieMetas, selectMovieStreams, selectIsMetaLoading } from '../../store/catalog/catalog.selectors';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Spinner from '../../components/Spinner/spinner.component';
@@ -20,11 +20,11 @@ const MovieMeta = () => {
     const [ selectedEpisode, setSelectedEpisode ] = useState({});
 
     const { addonUrl, type, id } = useParams();
-    const decodedID = decodeURIComponent(id.replaceAll("~","%"));
+    var decodedID = decodeURIComponent(id.replaceAll("~","%"));
     // console.log(decodedID);
     const MovieMetas = useSelector(selectMovieMetas);
     const MovieStreams = useSelector(selectMovieStreams);
-    const isLoading = useSelector(selectIsLoading);
+    const isLoading = useSelector(selectIsMetaLoading);
     const dispatch = useDispatch();
     const  movie = MovieMetas[1];
     const streams = MovieStreams[1];
@@ -34,12 +34,17 @@ const MovieMeta = () => {
     
     useEffect(() => {
         dispatch(fetchMovieMetaStart({addonUrl, type, decodedID}));
-        dispatch(fetchMovieStreamsStart({addonUrl, type, decodedID}));
     }, []);
+    
+    useEffect(() => {
+        if(movie && movie.type === "movie") {
+            dispatch(fetchMovieStreamsStart({addonUrl, type, decodedID}));
+        }
+    }, [movie])
 
     useEffect(() => {
         // console.log(seasonEpisodes);
-        if (movie && movie.video && movie.videos.length > 0) {
+        if (movie && movie.videos && movie.videos.length > 0) {
             var seasons = [];
             // var seasonEpisodes = [];
             movie.videos.map(video => {
@@ -70,6 +75,8 @@ const MovieMeta = () => {
     
     const selectEpisode = (episode) => {
         setSelectedEpisode(episode);
+        decodedID = decodeURIComponent(selectedEpisode.id.replaceAll("~","%"));
+        dispatch(fetchMovieStreamsStart({addonUrl, type, decodedID}));
     }
 
     const selectStream = (stream) => {
@@ -159,12 +166,18 @@ const MovieMeta = () => {
                                 </div>
                                 {seasonEpisodes.length > 0 &&
                                     <div className='episode-container'>
-                                    {
-                                        seasonEpisodes[selectedSeason].map(seasonEp => {
+                                    {seasonEpisodes[selectedSeason - 1] ? (
+                                        seasonEpisodes[selectedSeason - 1].map(seasonEp => {
                                             return (
                                                 <EpisodeCard key={seasonEp.id} seasonEp={seasonEp} selectEpisode={selectEpisode} />
                                             )
-                                        })
+                                        })) : (
+                                            seasonEpisodes[selectedSeason].map(seasonEp => {
+                                                return (
+                                                    <EpisodeCard key={seasonEp.id} seasonEp={seasonEp} selectEpisode={selectEpisode} />
+                                                )
+                                            })
+                                        )
                                     }
                                     </div>
                                 }
