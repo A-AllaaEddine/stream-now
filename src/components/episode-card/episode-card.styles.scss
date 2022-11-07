@@ -1,6 +1,6 @@
-.movie-card-container {
-    width: 200px;
-    height: 300px;
+.episode-card-container {
+    height: 180px;
+    width: 250px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -13,12 +13,12 @@
 
     &:hover {
         transform: scale(1.1);
-        .movie-image-container {
+        .episode-image-container {
             box-shadow: 5px 5px 10px #050320;
         }
     }
 
-    .movie-image-container {
+    .episode-image-container {
         width: 90%;
         height: 90%;
         box-shadow: 3px 3px 5px #050320;
@@ -37,9 +37,13 @@
             object-fit: cover;
  
         }
+
+        &.no-background {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
     }
 
-    .movie-name {
+    .episode-name {
         width: 80%;
         height: 50px;
         display: flex;

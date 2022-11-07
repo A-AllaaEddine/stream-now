@@ -1,7 +1,7 @@
 
 
 .navigation-container {
-    height: 50px;
+    min-height: 45px;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -100,7 +100,7 @@
                 border: none;
                 outline: none;
                 margin-left: 15px;
-                border-bottom: 1px solid rgb(88, 87, 87);
+                // border-bottom: 1px solid rgb(88, 87, 87);
                 color: white;
             }
             
@@ -108,6 +108,11 @@
                 width: 40px;
                 height: 30px;
                 background-color: transparent;
+                border: none;
+
+                &:hover {
+                    cursor: pointer;
+                }
 
 
                 .search-icon {

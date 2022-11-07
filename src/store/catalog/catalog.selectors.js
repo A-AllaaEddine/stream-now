@@ -52,46 +52,16 @@ export const selectAddosnUrls = createSelector(
 export const selectAddonsTypes = createSelector(
     [selectAddonsData],
     (AddonData) => AddonData.map(addon => {
-        // console.log(addon.data.types)
-        // const addonTypes = addon.data.types;
-        // let t = {};
-        // for (let type of addonTypes) {
-        //     t = {...t, [type]: type};
-        // }
         return addon.data.types;
     }
 ))
-// filter the type to get final types array
-export const selectAddonsTypesArray = createSelector(
-    [selectAddonsTypes],
-    (addonTypes) => addonTypes.map(addonType => {
-        
 
-        // const ids = addonTypes.map(o => o.type)
-        // const filtered = addonTypes.filter(({type}, index) => !ids.includes(type, index + 1))
-        console.log(addonTypes);
-        
-        // var types = {};
-        // for (let typeCat of filtered) {
-        //     const type = addon.data.catalogs.filter(cat => {
-        //         return cat.type === typeCat.type;
-        //     })
-        //     types = {...types, [typeCat.type]: type}
-        // }
-
-        // console.log(types);
-        // // console.log({addonUrl: addon.addonUrl, ...types});
-        // // console.log({addonUrl: addon.addonUrl, movie: typeMovies, series: typeSeries});
-        // return {addonUrl: addon.addonUrl, ...types};
-    })
-)
 
 // select addons types catalog
 export const selectAddonsTypesCatalogs = createSelector(
     [selectAddonsData],
     (AddonData) => AddonData.map(addon => {
         
-
         const typeCatalog = addon.data.catalogs.map(cat => {
             return {type: cat.type};
         })
@@ -106,12 +76,34 @@ export const selectAddonsTypesCatalogs = createSelector(
             types = {...types, [typeCat.type]: type}
         }
 
-        // console.log(types);
-        // console.log({addonUrl: addon.addonUrl, ...types});
-        // console.log({addonUrl: addon.addonUrl, movie: typeMovies, series: typeSeries});
-        return {addonUrl: addon.addonUrl, ...types};
+        return {addonUrl: addon.addonUrl, addonName: addon.addonName, ...types};
     })
 )
+
+// select Addons Catalogs
+export const selectAddonExtraCatalogs = createSelector(
+    [selectAddonsData],
+    (AddonData) => AddonData.map(addon => {
+
+        const Catalogs = addon.data.catalogs;
+
+        var catalogs = []
+        for (let i=0; i< Catalogs.length; i++) {
+            if (Catalogs[i].extra) {
+                // console.log(Catalogs);
+                // console.log({addonUrl: addon.addonUrl, addonName: addon.addonName, ...cat});
+                catalogs.push({addonUrl: addon.addonUrl, addonName: addon.addonName, ...Catalogs[i]});
+            }
+        }
+        // const ids = catalogs.map(o => o.id)
+        // const types = catalogs.map(o => o.type)
+        // const filtered = catalogs.filter(({id, type}, index) => !ids.includes((id, type), index + 1))
+        // console.log(filtered);
+        return catalogs;
+    })
+)
+
+
 
 
 // selecct the default catalog names from each addon
@@ -120,8 +112,6 @@ export const selectDefaultTypesCatalogs = createSelector(
     (AddonData) => AddonData.map(addon => {
 
 
-        var catalogs = {};
-        const addonUrl = addon.addonUrl;
         const typeCatalog = addon.data.catalogs.map(cat => {
             return {type: cat.type};
         })
@@ -134,7 +124,7 @@ export const selectDefaultTypesCatalogs = createSelector(
             const type = addon.data.catalogs.filter(cat => {
                 return cat.type === typeCat.type;
             })
-            types.push({addonUrl: addonUrl, ...type[0]});
+            types.push({addonUrl: addon.addonUrl, addonName: addon.addonName, ...type[0]});
         }
         // console.log(types);
 
@@ -147,4 +137,14 @@ export const selectDefaultTypesCatalogs = createSelector(
 export const selectIsLoading = createSelector(
     [selectCatalog],
     (catalog) => catalog.isLoading
+)
+
+// select Movie Meta from reducer
+export const selectMovieMetas = createSelector(
+    [selectCatalog],
+    (catalog) => catalog.MovieMetas
+)
+export const selectMovieStreams = createSelector(
+    [selectCatalog],
+    (catalog) => catalog.MovieStreams
 )

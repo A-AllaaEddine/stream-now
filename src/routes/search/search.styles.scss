@@ -13,27 +13,19 @@
 }
 
 
-.home-container {
-    min-height: 94%;
-    max-height: 96%;
-    width: 100vw;
+.search-results-container {
+    min-height: 96%;
+    min-width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     background-color: #201F32;
     color: white;
-    // padding-bottom: 20px;
+    padding-bottom: 20px;
     margin: 0;
     position: relative;
 
-    
-
-
-
-
-    
-    
     
 
     .items-container {

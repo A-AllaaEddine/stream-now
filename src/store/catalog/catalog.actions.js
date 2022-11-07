@@ -27,6 +27,18 @@ export const fetchCTypeatalogFailed = (error) => {
     return createAction(CATALOG_ACTION_TYPE.FETCH_TYPE_CATALOGS_FAILED, error)
 }
 
+// fetch search catalogs
+export const fetchSeachCatalogsStart = (query) => {
+    return createAction(CATALOG_ACTION_TYPE.FETCH_SEARCH_CATALOGS_START, query)
+}
+
+export const fetchSeachCatalogsSuccess = (searchCatalogs) => {
+    return createAction(CATALOG_ACTION_TYPE.FETCH_SEARCH_CATALOGS_SUCCESS, searchCatalogs)
+}
+export const fetchSeachCatalogsFailed = (error) => {
+    return createAction(CATALOG_ACTION_TYPE.FETCH_SEARCH_CATALOGS_FAILED, error)
+}
+
 
 // fetch catalogs and resources from addon url
 export const fetchCatalogsAndResourcesStart = (url) => {
@@ -54,4 +66,28 @@ export const fetchAddonDataSuccess = (data) => {
 
 export const fetchAddonDataFailed = (error) => {
     return createAction(CATALOG_ACTION_TYPE.FETCH_ADDON_DATA_FAILED, error)
+}
+
+export const fetchMovieMetaStart = (data) => {
+    return createAction(CATALOG_ACTION_TYPE.FETCH_MOVIE_META_START, data)
+}
+
+export const fetchMovieMetaSuccess = (data) => {
+    return createAction(CATALOG_ACTION_TYPE.FETCH_MOVIE_META_SUCCESS, data)
+}
+
+export const fetchMovieMetaFailed = (error) => {
+    return createAction(CATALOG_ACTION_TYPE.FETCH_MOVIE_META_FAILED, error)
+}
+
+export const fetchMovieStreamsStart = (data) => {
+    return createAction(CATALOG_ACTION_TYPE.FETCH_MOVIE_STREAM_START, data)
+}
+
+export const fetchMovieStreamsSuccess = (data) => {
+    return createAction(CATALOG_ACTION_TYPE.FETCH_MOVIE_STREAM_SUCCESS, data)
+}
+
+export const fetchMovieStreamsFailed = (error) => {
+    return createAction(CATALOG_ACTION_TYPE.FETCH_MOVIE_STREAM_FAILED, error)
 }

@@ -1,12 +1,24 @@
 import './movie-details.styles.scss';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,  } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const MovieDetails = ({ isScrolling, movie, clicked }) => {
     const navigate = useNavigate();
+
+    var addonUrl = movie.addonUrl && movie.addonUrl.replace( "https://", '');
+    addonUrl = addonUrl && addonUrl.replace( "http://", '');
+    addonUrl = addonUrl && addonUrl.replace( "/manifest.json", '');
+    // console.log(addonUrl);
+
+    
+    const handleNavigation = () => {
+        navigate(`/details/${addonUrl}/${movie.type}/${encodeURIComponent(movie.id).replaceAll("%2F","~2F")}`)
+    }
+
     return (
         <div style={{
-            backgroundImage: `url(${movie.background ? movie.background  : movie.poster})`
+            backgroundImage: `url(${movie.background || movie.poster})`
             }} className={`${ isScrolling ? 'isScrolling' : ''} ${clicked ? 'clicked' : ''} item-details-container`}>
             {/* <div  className='item-details-image-container'> */}
                 {/* <img src={selectedMovie.imageUrl} alt='' className='item-details-image'/> */}
@@ -59,7 +71,7 @@ const MovieDetails = ({ isScrolling, movie, clicked }) => {
                         </div>
                     )
                 }
-            <button className='watch-now' onClick={() => navigate('/description')}>WATCH NOW</button>
+            <button className='watch-now' onClick={handleNavigation}>WATCH NOW</button>
             </div>
         </div>
     )

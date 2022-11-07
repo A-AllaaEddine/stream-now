@@ -10,11 +10,29 @@ import Discover from '../../assets/Discover.png';
 import Library from '../../assets/Library.png';
 import StremioLogo from '../../assets/StremioLogo2.png';
 import Settings from '../../assets/setting.png';
-
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const Navigation = () => {
+    const [ searchInput, setSearchInput ] = useState('');
+    const navigate = useNavigate();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if(searchInput.length > 0) {
+            setSearchInput('');
+            navigate(`/search=${searchInput.replace(/\s/g, '-').toLowerCase()}`)
+        }
+    }
+
+    const handleChange = (e) => {
+        const { value } = e.target;
+
+        setSearchInput(value)
+    }
     
     return (
         <>
@@ -34,12 +52,17 @@ const Navigation = () => {
                     </Link >
                 </div>
                 <div className='search-container'>
-                    <div className='search-input-container'>
-                        <input type="text" placeholder='Search'/>
-                        <div className='search-button'>
-                            <Search className='search-icon'  />
-                        </div>
-                    </div>
+                    <form className='search-input-container' onSubmit={handleSubmit}>
+                        <input 
+                        name='search'
+                        type="text" 
+                        value={searchInput}
+                        placeholder='Search' 
+                        onChange={handleChange}/>
+                        <button className='search-button'>
+                            <Search  type="submit" className='search-icon'  />
+                        </button>
+                    </form>
                 </div>
                 {/* <div className='search-button'>
                     <Search className='search-icon'  />
