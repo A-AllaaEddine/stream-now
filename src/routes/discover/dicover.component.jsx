@@ -15,7 +15,6 @@ import { fetchTypeCatalogsStart } from '../../store/catalog/catalog.actions.js';
 
 
 
-const Types = []
 
 
 const Discover = () => {
@@ -34,12 +33,13 @@ const Discover = () => {
     const AddonsTypes = useSelector(selectAddonsTypes);
     const TypeCatalogs = useSelector(selectTypeCatalog);
     const isLoading = useSelector(selectIsLoading);
+
     const dispatch = useDispatch();
-    // console.log(TypeCatalogs);
+    // console.log(AddonsTypesCatalogs);
+
 
   
     useEffect(() => {
-        // console.log(AddonsTypes);
         var types = []
         for (let type of DefaultAddonTypes) {
             types.push(...type)
@@ -47,7 +47,6 @@ const Discover = () => {
         
         const ids = types.map(o => o.type)
         const filtered = types.filter(({type}, index) => !ids.includes(type, index + 1))
-        console.log(filtered);
         setTypes(filtered);
     }, [AddonsTypes])
     
@@ -86,11 +85,13 @@ const Discover = () => {
         setClicked(true);
     }
 
+
     const handleScroll = (event) => {
-        // console.log(event.currentTarget.scrollTop);
-        if(event.currentTarget.scrollTop <= 180) {
+        
+        if(event.currentTarget.scrollTop ) {
             setIsScrolling(false);
             setClicked(false);
+            setSelectedMovie({});
         }
         else {
             setIsScrolling(true);
@@ -154,9 +155,9 @@ const Discover = () => {
                         {!isLoading ?
                             (<div className={`${isScrolling ? 'isScrolling' : null} ${clicked ? 'clicked': ''} items-container`} onScroll={handleScroll}>
                                     {TypeCatalogs &&
-                                        TypeCatalogs.filter((_, idx) => idx > 0).map((movie) => {
+                                        TypeCatalogs.filter((_, idx) => idx > 2).map((movie) => {
                                             return (
-                                                <MovieCard key={movie.id}  movie={movie} selectItem={selectItem}/>
+                                                <MovieCard key={movie.id} addonUrl={TypeCatalogs[2].addonUrl} movie={movie} selectItem={selectItem}/>
                                             )
                                         })
                                     }

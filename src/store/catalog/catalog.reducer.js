@@ -9,6 +9,8 @@ const CATALOG_INITIAL_STATE = {
     defaultResources: [],
     AddonsData: [],
     TypeCatalogs: [],
+    MovieMetas:  [],
+    MovieStreams: [],
     AddonsUrls: [
         'https://v3-cinemeta.strem.io/manifest.json',
         'https://1fe84bc728af-imdb-catalogs.baby-beamup.club/manifest.json',
@@ -29,6 +31,9 @@ export const catalogReducer = (state = CATALOG_INITIAL_STATE, action) => {
         case CATALOG_ACTION_TYPE.FETCH_CATALOGS_AND_RESOURCES_START:
         case CATALOG_ACTION_TYPE.FETCH_ADDON_DATA_START:
         case CATALOG_ACTION_TYPE.FETCH_TYPE_CATALOGS_START:
+        case CATALOG_ACTION_TYPE.FETCH_SEARCH_CATALOGS_START:
+        case CATALOG_ACTION_TYPE.FETCH_MOVIE_META_START:
+        case CATALOG_ACTION_TYPE.FETCH_MOVIE_STREAM_START:
             return {
                 ...state,
                 isLoading: true
@@ -37,12 +42,16 @@ export const catalogReducer = (state = CATALOG_INITIAL_STATE, action) => {
         case CATALOG_ACTION_TYPE.FETCH_CATALOGS_AND_RESOURCES_FAILED:
         case CATALOG_ACTION_TYPE.FETCH_ADDON_DATA_FAILED:
         case CATALOG_ACTION_TYPE.FETCH_TYPE_CATALOGS_FAILED:
+        case CATALOG_ACTION_TYPE.FETCH_SEARCH_CATALOGS_FAILED:
+        case CATALOG_ACTION_TYPE.FETCH_MOVIE_META_FAILED:
+        case CATALOG_ACTION_TYPE.FETCH_MOVIE_STREAM_FAILED:
             return {
                 ...state,
                 error: payload,
                 isLoading: false
             };
         case CATALOG_ACTION_TYPE.FETCH_CATALOG_METAS_SUCCESS:
+        case CATALOG_ACTION_TYPE.FETCH_SEARCH_CATALOGS_SUCCESS:
             return {
                 ...state,
                 catalogMetas: payload,
@@ -65,6 +74,18 @@ export const catalogReducer = (state = CATALOG_INITIAL_STATE, action) => {
             return {
                 ...state,
                 TypeCatalogs: payload,
+                isLoading: false
+            }
+        case CATALOG_ACTION_TYPE.FETCH_MOVIE_META_SUCCESS:
+            return {
+                ...state,
+                MovieMetas: payload,
+                isLoading: false
+            }
+        case CATALOG_ACTION_TYPE.FETCH_MOVIE_STREAM_SUCCESS:
+            return {
+                ...state,
+                MovieStreams: payload,
                 isLoading: false
             }
         default:

@@ -186,6 +186,7 @@
 
         display: flex;
         flex-flow: row wrap;
+        justify-content: center;
 
         overflow-y: auto;
         overscroll-behavior-y: contain;
@@ -226,9 +227,6 @@
         }
 
         
-        .movie-container  {
-            margin-top: 30px;
-        }
 
     }
 }
