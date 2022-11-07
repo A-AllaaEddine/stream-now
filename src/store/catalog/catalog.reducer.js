@@ -18,6 +18,7 @@ const CATALOG_INITIAL_STATE = {
         'https://3bf59d9737bf-mycimaaddonbylazydzv.baby-beamup.club/manifest.json',
 ],
     isLoading: false,
+    isMetaLoading: false,
     error: null
 }
 
@@ -33,7 +34,7 @@ export const catalogReducer = (state = CATALOG_INITIAL_STATE, action) => {
         case CATALOG_ACTION_TYPE.FETCH_TYPE_CATALOGS_START:
         case CATALOG_ACTION_TYPE.FETCH_SEARCH_CATALOGS_START:
         case CATALOG_ACTION_TYPE.FETCH_MOVIE_META_START:
-        case CATALOG_ACTION_TYPE.FETCH_MOVIE_STREAM_START:
+        // case CATALOG_ACTION_TYPE.FETCH_MOVIE_STREAM_START:
             return {
                 ...state,
                 isLoading: true
@@ -80,13 +81,12 @@ export const catalogReducer = (state = CATALOG_INITIAL_STATE, action) => {
             return {
                 ...state,
                 MovieMetas: payload,
-                isLoading: false
+                isMetaLoading: false
             }
         case CATALOG_ACTION_TYPE.FETCH_MOVIE_STREAM_SUCCESS:
             return {
                 ...state,
-                MovieStreams: payload,
-                isLoading: false
+                MovieStreams: payload
             }
         default:
             return state;
