@@ -142,6 +142,10 @@ export const selectIsMetaLoading = createSelector(
     [selectCatalog],
     (catalog) => catalog.isMetaLoading
 )
+export const selectIsStreamLoading = createSelector(
+    [selectCatalog],
+    (catalog) => catalog.isStreamLoading
+)
 
 // select Movie Meta from reducer
 export const selectMovieMetas = createSelector(

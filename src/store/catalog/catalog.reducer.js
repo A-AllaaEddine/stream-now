@@ -16,9 +16,11 @@ const CATALOG_INITIAL_STATE = {
         'https://1fe84bc728af-imdb-catalogs.baby-beamup.club/manifest.json',
         'https://2ecbbd610840-trakt.baby-beamup.club/manifest.json',
         'https://3bf59d9737bf-mycimaaddonbylazydzv.baby-beamup.club/manifest.json',
+        'https://2ecbbd610840-kisskh.baby-beamup.club/manifest.json',
 ],
     isLoading: false,
     isMetaLoading: false,
+    isStreamLoading: false,
     error: null
 }
 
@@ -33,12 +35,22 @@ export const catalogReducer = (state = CATALOG_INITIAL_STATE, action) => {
         case CATALOG_ACTION_TYPE.FETCH_ADDON_DATA_START:
         case CATALOG_ACTION_TYPE.FETCH_TYPE_CATALOGS_START:
         case CATALOG_ACTION_TYPE.FETCH_SEARCH_CATALOGS_START:
-        case CATALOG_ACTION_TYPE.FETCH_MOVIE_META_START:
-        // case CATALOG_ACTION_TYPE.FETCH_MOVIE_STREAM_START:
             return {
                 ...state,
                 isLoading: true
             };
+        case CATALOG_ACTION_TYPE.FETCH_MOVIE_STREAM_START:
+            return {
+                ...state,
+                isStreamLoading: true
+            }
+        case CATALOG_ACTION_TYPE.FETCH_MOVIE_META_START:
+            return {
+                ...state,
+                MovieMetas: [],
+                isMetaLoading: true,
+
+            }
         case CATALOG_ACTION_TYPE.FETCH_CATALOG_METAS_FAILED:
         case CATALOG_ACTION_TYPE.FETCH_CATALOGS_AND_RESOURCES_FAILED:
         case CATALOG_ACTION_TYPE.FETCH_ADDON_DATA_FAILED:
@@ -86,7 +98,8 @@ export const catalogReducer = (state = CATALOG_INITIAL_STATE, action) => {
         case CATALOG_ACTION_TYPE.FETCH_MOVIE_STREAM_SUCCESS:
             return {
                 ...state,
-                MovieStreams: payload
+                MovieStreams: payload,
+                isStreamLoading: false
             }
         default:
             return state;

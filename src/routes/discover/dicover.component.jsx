@@ -20,13 +20,13 @@ import { fetchTypeCatalogsStart } from '../../store/catalog/catalog.actions.js';
 const Discover = () => {
     const [ selectedMovie, setSelectedMovie ] = useState({});
     const [ isScrolling, setIsScrolling ] = useState(false);
-    const [ selectedType, setSelectedType ] = useState("movie");
+    const [ selectedType, setSelectedType ] = useState("");
     const [ selectedSubType, setSelectedSubType ] = useState("Popular");
+    const [ types, setTypes ] = useState([]);
     const [ subTypes, setSubTypes ] = useState([]);
-    const [ selectedId, setSelectedId ] = useState("top");
+    const [ selectedId, setSelectedId ] = useState("");
     const [ selectedAddonUrl, setSelectedAddonUrl ] = useState("https://v3-cinemeta.strem.io/manifest.json");
     const [ clicked, setClicked ] = useState(false);
-    const [ types, setTypes ] = useState(false);
 
     const AddonsTypesCatalogs = useSelector(selectAddonsTypesCatalogs);
     const DefaultAddonTypes = useSelector(selectDefaultTypesCatalogs);
@@ -76,6 +76,8 @@ const Discover = () => {
 
 
     useEffect(() => {
+        setSelectedType("movie");
+        setSelectedId("top");
         dispatch(fetchTypeCatalogsStart({selectedAddonUrl, selectedType, selectedId}))
     }, [selectedAddonUrl, selectedType, selectedId])
 
@@ -101,12 +103,14 @@ const Discover = () => {
     const selectTypeAndIdAndUrl = (type, id, addonUrl) => {
         switch (type) {
             case "movie":
-                setSelectedId("MCmovies");
-                setSelectedAddonUrl("https://v3-cinemeta.strem.io/manifest.json'")
+                setSelectedId("top");
+                setSelectedSubType("Popular");
+                setSelectedAddonUrl("https://v3-cinemeta.strem.io/manifest.json")
                 break;
             case "series":
-                setSelectedId("MCseries");
-                setSelectedAddonUrl("https://v3-cinemeta.strem.io/manifest.json'")
+                setSelectedId("top");
+                setSelectedSubType("Popular");
+                setSelectedAddonUrl("https://v3-cinemeta.strem.io/manifest.json")
                 break;
             default:
                 setSelectedId(id)
@@ -121,8 +125,6 @@ const Discover = () => {
 
     return (
         <>
-            {
-                !isLoading ? (
                     <div className='discover-container'>
                         <MovieDetails isScrolling={isScrolling} movie={selectedMovie} clicked={clicked} />
                         <div className='types-subtypes-container'>
@@ -152,28 +154,27 @@ const Discover = () => {
                                 </div>
                             </div>
                         </div>
-                        {!isLoading ?
-                            (<div className={`${isScrolling ? 'isScrolling' : null} ${clicked ? 'clicked': ''} items-container`} onScroll={handleScroll}>
+                        {!isLoading && types.length > 0 && subTypes.length > 0 ?
+                            (TypeCatalogs.length > 2 ? (
+                                <div className={`${isScrolling ? 'isScrolling' : null} ${clicked ? 'clicked': ''} items-container`} onScroll={handleScroll}>
                                     {TypeCatalogs &&
                                         TypeCatalogs.filter((_, idx) => idx > 2).map((movie) => {
                                             return (
-                                                <MovieCard key={movie.id} addonUrl={TypeCatalogs[2].addonUrl} movie={movie} selectItem={selectItem}/>
+                                                <MovieCard key={movie.id} movie={{addonUrl: TypeCatalogs[2].addonUrl, ...movie}} selectItem={selectItem}/>
                                             )
                                         })
                                     }
-                            </div>) : (
-                                <div className='items-container'> 
+                                </div>) : (
+                                <div className='no-items-container'>
+                                    Addon did not return any item
+                                </div>
+                            )) : (
+                                <div className='items-spinner-container'> 
                                     <Spinner />
                                 </div>
                             )
                         }
                     </div>
-                ): (
-                    <div className='spinner-container'> 
-                        <Spinner />
-                    </div>
-                )
-            }
         </>
     )
 }
