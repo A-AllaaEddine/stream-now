@@ -6,14 +6,12 @@ import { useEffect } from 'react';
 const MovieDetails = ({ isScrolling, movie, clicked }) => {
     const navigate = useNavigate();
 
-    var addonUrl = movie.addonUrl && movie.addonUrl.replace( "https://", '');
-    addonUrl = addonUrl && addonUrl.replace( "http://", '');
-    addonUrl = addonUrl && addonUrl.replace( "/manifest.json", '');
-    // console.log(addonUrl);
+    var addonUrl = movie.addonUrl && movie.addonUrl.replace( "/manifest.json", '');
+    // console.log(movie);
 
     
     const handleNavigation = () => {
-        navigate(`/details/${addonUrl}/${movie.type}/${encodeURIComponent(movie.id).replaceAll("%2F","~2F")}`)
+        navigate(`/details/${encodeURIComponent(addonUrl).replaceAll("%2F","~2F")}/${movie.type}/${encodeURIComponent(movie.id).replaceAll("%2F","~2F")}`)
     }
 
     return (

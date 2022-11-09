@@ -9,7 +9,7 @@ import Spinner from '../../components/Spinner/spinner.component';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { selectCatalogMetas, selectIsLoading, selectDefaultTypesCatalogs, selectAddonExtraCatalogs } from '../../store/catalog/catalog.selectors';
+import { selectCatalogMetas, selectIsLoading, selectAddonExtraCatalogs } from '../../store/catalog/catalog.selectors';
 import { fetchSeachCatalogsStart } from '../../store/catalog/catalog.actions';
 
 
@@ -21,10 +21,8 @@ const Search = () => {
     const [clicked, setClicked] = useState(false);
 
     
-    const defaultTypesCatalog = useSelector(selectDefaultTypesCatalogs);
     const AddonsCatalogs = useSelector(selectAddonExtraCatalogs);
     // console.log(AddonsCatalogs);
-    // console.log(defaultTypesCatalog);
 
     const CatalogMetas = useSelector(selectCatalogMetas);
     const isLoading = useSelector(selectIsLoading);

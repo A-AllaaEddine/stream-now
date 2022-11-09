@@ -72,7 +72,7 @@ export const GetMovieMetaFromAddon = async (url, data) => {
 }
 
 export const GetMovieStreamsFromAddon = async (url, data) => {
-    const { resource, type, id, extra } = data;
+    const { addonName, resource, type, id, extra } = data;
     var addonUrl = url.replace("/manifest.json", '');
     // const addonName = await Client.detectFromURL(url)
     // .then(res => {return res.addon.manifest.name})
@@ -85,7 +85,7 @@ export const GetMovieStreamsFromAddon = async (url, data) => {
     Data.push(await fetch(dataLink).then(res => res.json()).then(res => { return  res.streams})
     .catch((error) => console.log(error)));
 
-    Data.unshift({ addonUrl: url});
+    Data.unshift({ addonUrl: url}, {addonName: addonName});
 
     // console.log(Data);
 
