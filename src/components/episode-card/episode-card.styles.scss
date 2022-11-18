@@ -1,6 +1,7 @@
 .episode-card-container {
     height: 180px;
     width: 250px;
+    min-width: 250px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -12,10 +13,11 @@
 
 
     &:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
         .episode-image-container {
             box-shadow: 5px 5px 10px #050320;
         }
+        cursor: pointer;
     }
 
     .episode-image-container {

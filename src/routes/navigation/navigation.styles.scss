@@ -7,8 +7,13 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #533774;
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    z-index: 2;
 
+
+    
 
 
     // .stremio-image-container {
@@ -79,19 +84,31 @@
     .search-container{
         position: relative;
         height: 100%;
-        width: 500px;
+        width: 100%;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         
         .search-input-container {
-            width: 90%;
+            width: 200px;
             height: 80%;
             display: flex;
             justify-content: space-around;
             align-items: center;
             border-radius: 20px;
-            background-color: #3c2753;
+            background-color: transparent;
+            transition: 0.3s;
+
+            
+
+            &:focus-within {
+                background-color: #0e2c4b;
+                width: 500px;
+            }
+            &:hover {
+                background-color: #0e2c4b;
+                width: 500px;
+            }
 
             input {
                 width: 90%;
@@ -100,7 +117,6 @@
                 border: none;
                 outline: none;
                 margin-left: 15px;
-                // border-bottom: 1px solid rgb(88, 87, 87);
                 color: white;
             }
             

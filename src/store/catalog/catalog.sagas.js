@@ -162,7 +162,7 @@ export function* fetchAddonDataAsync(action) {
 // a new version of requesting for metas
 export function* fetchMovieMetasAsync(action) {
     const {AddonUrl, type, decodedID, AddonsData} = action.payload;
-    // console.log(AddonsCatalogs);
+    console.log(AddonUrl);
 
     if ( AddonsData.length <= 0) {
         return [];
@@ -181,7 +181,7 @@ export function* fetchMovieMetasAsync(action) {
         AddonsData.map(addon => {
             // console.log(addon.addonUrl);
             // console.log(url);
-            if(addon.addonUrl === url) {
+            if(addon.addonUrl === AddonUrl) {
                     currentAddon = addon;
             }
         })
@@ -234,7 +234,7 @@ export function* fetchMovieMetasAsync(action) {
 // a newversion of requesting streams
 export function* fechMovieStreamAsync(action) {
     const {AddonUrl, type, decodedID, AddonsData} = action.payload;
-    // console.log(AddonsCatalogs);
+    console.log(AddonUrl);
 
     if ( AddonsData.length <= 0) {
         return [];
@@ -252,10 +252,11 @@ export function* fechMovieStreamAsync(action) {
         AddonsData.map(addon => {
             // console.log(addon.addonUrl);
             // console.log(url);
-            if(addon.addonUrl === url) {
+            if(addon.addonUrl === AddonUrl) {
                     currentAddon = addon;
             }
         })
+        // console.log(currentAddon);
 
         // check for addons that support that prefix
         var servingAddons = [];

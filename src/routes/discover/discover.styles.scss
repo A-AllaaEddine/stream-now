@@ -1,12 +1,11 @@
 .spinner-container {
-    max-width: 96%;
-    min-width: 96%;
-    min-height: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #201F32;
+    background-color: #06121E;
+    padding-top: 45px;
 }
 
 .discover-container {
@@ -16,21 +15,20 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: #201F32;
+    background-color: #06121E;
     color: white;
     padding-bottom: 20px;
     overflow-y: hidden;
+    // padding-top: 45px;
 
 
     .discover-spinner-container {
-        max-width: 96%;
-        min-width: 96%;
-        min-height: 100%;
-        max-height: 100%;
+        width: 100%;
+        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #201F32;
+        background-color: #06121E;
     }
 
 
@@ -63,16 +61,16 @@
                 }
         
                 &::-webkit-scrollbar-track {
-                    box-shadow: inset 0 0 6px #201F32;
+                    box-shadow: inset 0 0 6px #06121E;
                 }
         
                 &::-webkit-scrollbar-thumb {
-                    background-color: #3D3F95;
+                    background-color: #090c18;
                     outline: 1px solid black;
                     border-radius: 10px;
         
                     &:hover {
-                        background-color: #625FA5;
+                        background-color: #0E2C4B;
                     }
                 }
         
@@ -94,11 +92,11 @@
 
         
                     &.checked {
-                        color: #7e7ace;
+                        color: #207fdd;
                     }
     
                     &:hover {
-                        color: #625FA5;
+                        color: #207fdd;
                     }
         
                 }
@@ -126,16 +124,16 @@
                 }
         
                 &::-webkit-scrollbar-track {
-                    box-shadow: inset 0 0 6px #201F32;
+                    box-shadow: inset 0 0 6px #06121E;
                 }
         
                 &::-webkit-scrollbar-thumb {
-                    background-color: #3D3F95;
+                    background-color: #090c18;
                     outline: 1px solid black;
                     border-radius: 10px;
         
                     &:hover {
-                        background-color: #625FA5;
+                        background-color: #0E2C4B;
                     }
                 }
         
@@ -159,11 +157,11 @@
     
 
                     &.checked {
-                        color: #7e7ace;
+                        color: #207fdd;
                     }
     
                     &:hover {
-                        color: #625FA5;
+                        color: #207fdd;
                     }
                 }
             }
@@ -178,6 +176,8 @@
         height: 99%;
         padding-inline: 10px;
         padding-top: 30px;
+        margin-top: 20px;
+        // flex-shrink: 0;
 
         // display: grid;
         // grid-template-columns: repeat(9, 1fr);
@@ -205,20 +205,20 @@
         }
 
         &::-webkit-scrollbar {
-            width: 10px;
+            width: 7px;
         }
 
         &::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 6px #201F32;
+            box-shadow: inset 0 0 6px #06121E;
         }
 
         &::-webkit-scrollbar-thumb {
-            background-color: #3D3F95;
+            background-color: #090c18;
             outline: 1px solid black;
             border-radius: 10px;
 
             &:hover {
-                background-color: #625FA5;
+                background-color: #0E2C4B;
             }
         }
 
@@ -240,7 +240,7 @@
 
     .items-spinner-container {
         width: 100%;
-        height: 99%;
+        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;

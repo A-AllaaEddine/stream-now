@@ -16,6 +16,7 @@
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.2.1",
+    "reduxjs-toolkit-persist": "^7.2.1",
     "sass": "^1.55.0",
     "stremio-addon-client": "^1.16.1",
     "web-vitals": "^2.1.4"
