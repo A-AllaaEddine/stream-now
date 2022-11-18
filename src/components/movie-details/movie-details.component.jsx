@@ -26,11 +26,18 @@ const MovieDetails = ({ isScrolling, movie, clicked }) => {
                 <p className='item-title'>{movie.name && movie.name}</p>
                 <div className='item-year-time-genre-container'>
                     <p className='item-time'>2h</p>
-                    <p className='item-genre'>{movie.genre && movie.genre}</p>
-                    {movie.genres &&
-                        movie.genres.map(genre => {
-                            return <p key={genre} className='item-genre'>{genre}</p>
-                        })
+                    {
+                        movie.genre ? (
+                            movie.genre.map(genre => {
+                                return <p key={genre} className='item-genre'>{genre}</p>
+                            })
+                        ) : (
+                            movie.genres &&
+                                movie.genres.map(genre => {
+                                    return <p key={genre} className='item-genre'>{genre}</p>
+                                })
+                            
+                        )
                     }
                     <p className='item-releaseInfo'>{movie.releaseInfo && movie.releaseInfo}</p>
                 </div>
@@ -64,7 +71,7 @@ const MovieDetails = ({ isScrolling, movie, clicked }) => {
                 {
                     (movie.summary || movie.description) && (
                         <div className='item-summary-container'>
-                            <p className='item-summary'>Summary</p>
+                            {/* <p className='item-summary'>Summary</p> */}
                             <p>{movie.summary || movie.description}</p>
                         </div>
                     )

@@ -20,7 +20,7 @@ import { fetchTypeCatalogsStart } from '../../store/catalog/catalog.actions.js';
 const Discover = () => {
     const [ selectedMovie, setSelectedMovie ] = useState({});
     const [ isScrolling, setIsScrolling ] = useState(false);
-    const [ selectedType, setSelectedType ] = useState("");
+    const [ selectedType, setSelectedType ] = useState("movie");
     const [ selectedSubType, setSelectedSubType ] = useState("Popular");
     const [ types, setTypes ] = useState([]);
     const [ subTypes, setSubTypes ] = useState([]);
@@ -79,6 +79,10 @@ const Discover = () => {
         setSelectedType("movie");
         setSelectedId("top");
         dispatch(fetchTypeCatalogsStart({selectedAddonUrl, selectedType, selectedId}))
+    }, [])
+    
+    useEffect(() => {
+        dispatch(fetchTypeCatalogsStart({selectedAddonUrl, selectedType, selectedId}))
     }, [selectedAddonUrl, selectedType, selectedId])
 
     const selectItem = (movieItem) => {
@@ -119,9 +123,7 @@ const Discover = () => {
             setSelectedType(type);
         }
 
-    const selectId = (id) => {
-        setSelectedId(id);
-    }
+    
 
     return (
         <>
@@ -147,7 +149,7 @@ const Discover = () => {
                                     {subTypes &&
                                         subTypes.map(subtype => {
                                             return (
-                                                <Link key={subtype.id} className={`${selectedSubType === subtype.name ? 'checked' : ''} subtype`} onClick={() => {selectId(subtype.id); setSelectedAddonUrl(subtype.addonUrl); setSelectedSubType(subtype.name);}} >{subtype.name}</Link>
+                                                <Link key={subtype.id} className={`${selectedSubType === subtype.name ? 'checked' : ''} subtype`} onClick={() => {setSelectedId(subtype.id); setSelectedAddonUrl(subtype.addonUrl); setSelectedSubType(subtype.name);}} >{subtype.name}</Link>
                                             )
                                         })
                                     }
