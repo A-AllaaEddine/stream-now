@@ -20,7 +20,6 @@ const MovieMeta = () => {
     const [ selectedSeason, setSelectedSeason ] = useState(0);
     const [ selectedEpisode, setSelectedEpisode ] = useState({});
     const [ toggled, setToggled ] = useState(false);
-    const [ hovered, setHovered ] = useState(false);
 
     const { addonUrl, type, id } = useParams();
     var decodedID = decodeURIComponent(id.replaceAll("~","%"));
@@ -41,7 +40,7 @@ const MovieMeta = () => {
     
     useEffect(() => {
         dispatch(fetchMovieMetaStart({AddonUrl, AddonsData, type, decodedID}));
-    }, []);
+    }, [AddonsData]);
     
     useEffect(() => {
         if(movie && movie.type === "movie" && MovieMetas.length > 0) {
@@ -102,9 +101,7 @@ const MovieMeta = () => {
         setToggled(!toggled);
     }
 
-    const toggleHover = () => {
-        setHovered(!hovered);
-    }
+    
 
     return (
         <>
@@ -213,24 +210,31 @@ const MovieMeta = () => {
                         </div>
                         {!isStreamLoading ? (MovieStreams.length > 0 ?  (
                             <div className='movie-streams-container'>
-                                {
-                                    MovieStreams.map((stream, index) => {
-                                        if(stream[2]) {
-                                            return (
-                                                <div key={index} className='addon-stream-container'>
-                                                    <h3>{stream[1].addonName}</h3>
-                                                    <div className='streams-container'>
-                                                        {stream[2] && 
-                                                            stream[2].map((str, idx) => {
-                                                                return  <p key={idx} className='movie-stream' onClick={() => selectStream(str)}>{str.name}</p>
-                                                            })
-                                                        }
+                                <div className='streams'>
+                                    {
+                                        MovieStreams.map((stream, index) => {
+                                            if(stream[2]) {
+                                                return (
+                                                    <div key={index} className='addon-stream-container'>
+                                                        <h3>{stream[1].addonName}</h3>
+                                                        <div className='streams-container'>
+                                                            {stream[2] && 
+                                                                stream[2].map((str, idx) => {
+                                                                    return  (
+                                                                        <div key={idx} className='stream-container' onClick={() => selectStream(str)}>
+                                                                            <p className='stream-name' >{str.name}</p>
+                                                                            <p className='stream-title' >{str.title}</p>
+                                                                        </div>
+                                                                    )
+                                                                })
+                                                            }
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            )
-                                        }
-                                    })
-                                }
+                                                )
+                                            }
+                                        })
+                                    }
+                                </div>
                             </div>) : (
                             <div className='movie-streams-container'>
                                 <h2>No Stream Found</h2>

@@ -106,31 +106,34 @@ export const selectAddonExtraCatalogs = createSelector(
 
 
 
-// selecct the default catalog names from each addon
+// select the default catalog names from each addon
 export const selectDefaultTypesCatalogs = createSelector(
     [selectAddonsData],
     (AddonData) => AddonData.map(addon => {
 
-
-        const typeCatalog = addon.data.catalogs.map(cat => {
-            return {type: cat.type};
-        })
-        const ids = typeCatalog.map(o => o.type)
-        const filtered = typeCatalog.filter(({type}, index) => !ids.includes(type, index + 1))
-
-        // console.log(filtered);
-        var types = [];
-        for (let typeCat of filtered) {
-            const type = addon.data.catalogs.filter(cat => {
-                return cat.type === typeCat.type;
+        if(addon.data.resources.includes("catalog") || addon.data.catalogs.length > 0) {
+            const typeCatalog = addon.data.catalogs.map(cat => {
+                return {type: cat.type};
             })
-            types.push({addonUrl: addon.addonUrl, addonName: addon.addonName, ...type[0]});
+            const ids = typeCatalog.map(o => o.type)
+            const filtered = typeCatalog.filter(({type}, index) => !ids.includes(type, index + 1))
+            
+            // console.log(filtered);
+            var types = [];
+            for (let typeCat of filtered) {
+                const type = addon.data.catalogs.filter(cat => {
+                    return cat.type === typeCat.type;
+                })
+                types.push({addonUrl: addon.addonUrl, addonName: addon.addonName, ...type[0]});
+            }
+            // console.log(types);
+    
+            // console.log([typeMovies[0], typeSeries[0]])
+            return types;
         }
-        // console.log(types);
+        
 
-        // console.log([typeMovies[0], typeSeries[0]])
-        return types;
-    })
+    }).filter(type => { return type !== undefined})
 )
 
 // select isLoading from reducer

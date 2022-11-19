@@ -1,7 +1,7 @@
 
 import { takeLatest, all, call, put } from 'redux-saga/effects';
 
-import { GetCatalogFromAddon, GetCatalogsAndResources, GetAddonData, GetExtraCatalogFromAddon, GetMovieMetaFromAddon, GetMovieStreamsFromAddon } from '../../utils/addonUtils';
+import { GetCatalogFromAddon, GetCatalogsAndResources, GetAddonData, GetExtraCatalogFromAddon, GetMovieMetaFromAddon, GetMovieStreamsFromAddon, isSupported, dispatchDelay } from '../../utils/addonUtils';
 
 import { 
     fetchCatalogMetasFailed,
@@ -25,25 +25,31 @@ import { CATALOG_ACTION_TYPE } from './catalog.types';
 
 // fetch catalog for all type from all addons for home screen display
 export function* fetchCatalogMetasAsync(action) {
-    const defaultTypesCatalog = action.payload;
+    const {defaultTypesCatalog} = action.payload;
+
+    // console.log(defaultTypesCatalog);
+
     if (defaultTypesCatalog.length <= 0) {
         return [];
     };
 
     try {
         var MetaData = []
-        for (let type of defaultTypesCatalog) {
-            var data = [];
-            for (let t of type) {
-                const moviesData = {addonUrl: t.addonUrl, resource: 'catalog', type: `${t && t.type}`, id: `${t && t.id}`, extra: {}};
-                data.push(yield call(GetCatalogFromAddon, t && t.addonUrl, moviesData));
-            }
-            MetaData.push(data);
-        }
 
-        if(MetaData.length > 0) {
-            yield put(fetchCatalogMetasSuccess(MetaData));
-        } else {
+        for(let type of defaultTypesCatalog) {
+            var f = yield all(type.map(t => {
+                // console.log(t);
+                const moviesData = {addonUrl: t.addonUrl, resource: 'catalog', type: `${t && t.type}`, id: `${t && t.id}`, extra: {}};
+                return call(GetCatalogFromAddon, t && t.addonUrl, moviesData);
+            }))
+            // console.log(f);
+            MetaData.push(f);
+            yield put(fetchCatalogMetasSuccess([...MetaData]));
+        }
+        
+        // console.log(MetaData);
+
+        if(MetaData.length === 0) {
             yield put(fetchCatalogMetasSuccess([]));
         }
     }catch(error) {
@@ -159,22 +165,20 @@ export function* fetchAddonDataAsync(action) {
 }
 
 
-// a new version of requesting for metas
+// fetch Metas for selected movie/series
 export function* fetchMovieMetasAsync(action) {
     const {AddonUrl, type, decodedID, AddonsData} = action.payload;
-    console.log(AddonUrl);
+    // console.log(AddonUrl);
 
     if ( AddonsData.length <= 0) {
         return [];
     };
 
-    var url = `${AddonUrl}/manifest.json`;
     var id = encodeURIComponent(decodedID);
 
     // console.log(url);
 
     try {
-        var MetaData = [];
         
         //get the current addon data
         var currentAddon;
@@ -187,19 +191,23 @@ export function* fetchMovieMetasAsync(action) {
         })
 
         // check for addons that support that prefix
-        var servingAddon;
+        var servingAddon = null;
         for (let addon of AddonsData) {
-            if((addon.data.resources.includes("meta") || addon.data.resources.some(res => res.name === "meta")) && (addon.data.resources.some(res => res.idPrefixes && res.idPrefixes.length > 0) || (addon.data.idPrefixes && addon.data.idPrefixes.length > 0))) {
-                var addonPrefix = [];
-                addon.data.resources && addon.data.resources.map(resource => {
-                    if(resource.idPrefixes && resource.idPrefixes.length > 0) {
-                        addonPrefix.push(...resource.idPrefixes);
-                    }
-                })
-                addon.data.idPrefixes && addon.data.idPrefixes.length > 0 && addonPrefix.push(...addon.data.idPrefixes)
-                if(addonPrefix.some(prefix => decodedID.toLowerCase().startsWith(prefix.toLowerCase()))) {
-                    servingAddon = addon;
-                }
+            // if((addon.data.resources.includes("meta") || addon.data.resources.some(res => res.name === "meta")) && (addon.data.resources.some(res => res.idPrefixes && res.idPrefixes.length > 0) || (addon.data.idPrefixes && addon.data.idPrefixes.length > 0))) {
+            //     var addonPrefix = [];
+            //     addon.data.resources && addon.data.resources.map(resource => {
+            //         if(resource.idPrefixes && resource.idPrefixes.length > 0) {
+            //             addonPrefix.push(...resource.idPrefixes);
+            //         }
+            //     })
+            //     addon.data.idPrefixes && addon.data.idPrefixes.length > 0 && addonPrefix.push(...addon.data.idPrefixes)
+            //     if(addonPrefix.some(prefix => decodedID.toLowerCase().startsWith(prefix.toLowerCase()))) {
+            //         servingAddon = addon;
+            //     }
+            //     break;
+            // }
+            servingAddon = isSupported(addon, "meta", decodedID);
+            if(servingAddon) {
                 break;
             }
         }
@@ -207,18 +215,15 @@ export function* fetchMovieMetasAsync(action) {
             servingAddon = currentAddon;
         }
 
-        if(servingAddon.data.resources.includes("meta") || servingAddon.data.resources.some(res => res.name === "meta")) {
-            const moviesData = {addonUrl: servingAddon.addonUrl, resource: 'meta', type: type, id: id, extra: {}};
-            const movieMeta = yield call(GetMovieMetaFromAddon, servingAddon.addonUrl, moviesData);
-            if(movieMeta[1] !== undefined) {
-                yield put(fetchMovieMetaSuccess(movieMeta));
-            } else {
-                yield put(fetchMovieMetaSuccess([]));
-            }
-        }
-        else {
+      
+        const moviesData = {addonUrl: servingAddon.addonUrl, resource: 'meta', type: type, id: id, extra: {}};
+        const movieMeta = yield call(GetMovieMetaFromAddon, servingAddon.addonUrl, moviesData);
+        if(movieMeta[1] !== undefined) {
+            yield put(fetchMovieMetaSuccess(movieMeta));
+        } else {
             yield put(fetchMovieMetaSuccess([]));
         }
+        
 
 
 
@@ -231,16 +236,15 @@ export function* fetchMovieMetasAsync(action) {
 
 }
 
-// a newversion of requesting streams
+// fetch Streams for selected movie/series
 export function* fechMovieStreamAsync(action) {
     const {AddonUrl, type, decodedID, AddonsData} = action.payload;
-    console.log(AddonUrl);
+    // console.log(AddonUrl);
 
     if ( AddonsData.length <= 0) {
         return [];
     };
 
-    var url = `${AddonUrl}/manifest.json`;
     var id = encodeURIComponent(decodedID);
 
 
@@ -262,20 +266,24 @@ export function* fechMovieStreamAsync(action) {
         var servingAddons = [];
         for (let addon of AddonsData) {
             // console.log(addon.data.resources.includes("stream") || addon.data.resources.some(res => res.name === "stream"));
-            if((addon.data.resources.includes("stream") || addon.data.resources.some(res => res.name === "stream")) && (addon.data.resources.some(res => res.idPrefixes && res.idPrefixes.length > 0) || (addon.data.idPrefixes && addon.data.idPrefixes.length > 0))) {
-                var addonPrefix = [];
-                addon.data.resources && addon.data.resources.map(resource => {
-                    if(resource.idPrefixes && resource.idPrefixes.length > 0) {
-                        addonPrefix.push(...resource.idPrefixes);
-                    }
-                })
-                addon.data.idPrefixes && addon.data.idPrefixes.length > 0 && addonPrefix.push(...addon.data.idPrefixes)
-                // console.log(addonPrefix);
-                if(addonPrefix.some(prefix => decodedID.toLowerCase().startsWith(prefix.toLowerCase()))) {
-                    servingAddons.push(addon.addonUrl);
-                }
-            }
+            // if((addon.data.resources.includes("stream") || addon.data.resources.some(res => res.name === "stream")) && (addon.data.resources.some(res => res.idPrefixes && res.idPrefixes.length > 0) || (addon.data.idPrefixes && addon.data.idPrefixes.length > 0))) {
+            //     var addonPrefix = [];
+            //     addon.data.resources && addon.data.resources.map(resource => {
+            //         if(resource.idPrefixes && resource.idPrefixes.length > 0) {
+            //             addonPrefix.push(...resource.idPrefixes);
+            //         }
+            //     })
+            //     addon.data.idPrefixes && addon.data.idPrefixes.length > 0 && addonPrefix.push(...addon.data.idPrefixes)
+            //     // console.log(addonPrefix);
+            //     if(addonPrefix.some(prefix => decodedID.toLowerCase().startsWith(prefix.toLowerCase()))) {
+            //         servingAddons.push(addon.addonUrl);
+            //     }
+            // }
+            // console.log(isSupported(addon, "stream", decodedID));
+            servingAddons.push(isSupported(addon, "stream", decodedID));
         }
+
+        servingAddons = servingAddons.filter(add => { return add !== undefined});
         // console.log(servingAddons);
         if(servingAddons.length === 0) {
             servingAddons.push(currentAddon);
@@ -300,50 +308,6 @@ export function* fechMovieStreamAsync(action) {
 
 }
 
-// fetch Metas for selected movie/series
-// export function* fechMovieMetaAsync(action) {
-//     const { AddonUrl, type, decodedID } = action.payload;
-
-//     var url = `${AddonUrl}/manifest.json`
-//     // console.log(url);
-
-//     // console.log(url);
-//     // console.log(type);
-//     var id = encodeURIComponent(decodedID)
-
-//     try {
-        
-//         const moviesData = {addonUrl: url, resource: 'meta', type: type, id: id, extra: {}};
-//         const movieMeta = yield call(GetMovieMetaFromAddon, url, moviesData);
-//         // console.log(moviesData);
-//         yield put(fetchMovieMetaSuccess(movieMeta));
-//     }
-//     catch (error) {
-//         yield put(fetchMovieMetaFailed(error));
-//     }
-// }
-
-// fetch stream from selected movie/series
-// export function* fechMovieStreamsAsync(action) {
-//     const { AddonUrl, type, decodedID } = action.payload;
-
-//     var url = `${AddonUrl}/manifest.json`;
-
-//     // console.log(url);
-//     // console.log(type);
-//     var id = encodeURIComponent(decodedID)
-
-//     try {
-        
-//         const moviesData = {addonUrl: url, resource: 'stream', type: type, id: id, extra: {}};
-//         const movieStream = yield call(GetMovieStreamsFromAddon, url, moviesData);
-//         // console.log(moviesData);
-//         yield put(fetchMovieStreamsSuccess(movieStream));
-//     }
-//     catch (error) {
-//         yield put(fetchMovieStreamsFailed(error));
-//     }
-// }
 
 
 // listeners

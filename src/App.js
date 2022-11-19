@@ -1,6 +1,6 @@
 import './App.scss';
 
-import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
 // import Navigation from './routes/navigation/navigation.component';
 // import Home from './routes/home/home.component';
@@ -29,15 +29,11 @@ const MediaPlayer = lazy(() => import('./routes/media-player/media-player.compon
 const App = () => {
   const AddonsUrls = useSelector(selectAddosnUrls);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
     dispatch(fetchAddonDataStart(AddonsUrls));
-    if (!((location.pathname === "/discover") || location.pathname == "/" || (location.pathname === "/description") || (location.pathname === "/search=:searchParam") || (location.pathname === "/player/:streamUrl"))) {
-      navigate("/page-not-found");
-    }
-}, []);
+}, [location.pathname]);
   return (
       <div className='App'>
         <Suspense>
@@ -48,7 +44,7 @@ const App = () => {
               <Route path='details/:addonUrl/:type/:id' element={<MovieMeta />} />
               <Route path='search=:searchParam' element={<Search />} />
               <Route path='player/:streamUrl' element={<MediaPlayer />} />
-              <Route path='page-not-found' element={<PageNotFound />} />
+              <Route path="*" element={<PageNotFound />} />
             </Route>
           </Routes>
         </Suspense>
