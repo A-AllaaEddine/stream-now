@@ -150,7 +150,7 @@
                         width: 200px;
                         height: 40px;
                         background-color: #207fdd;
-                        box-shadow: 5px 5px 10px #000;
+                        box-shadow: 5px 8px 15px -5px #000;
                         border-radius: 5px;
                         border: none;
                         color: white;
@@ -163,7 +163,7 @@
                         width: 200px;
                         height: 40px;
                         background-color: #323942;
-                        box-shadow: 5px 5px 10px #000;
+                        box-shadow: 5px 8px 15px -5px #000;
                         border-radius: 5px;
                         border: none;
                         color: white;
@@ -382,60 +382,108 @@
     
 
     .movie-streams-container {
-        min-width: 20%;
+        min-width: 450px;
+        max-width: 450px;
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
         border-left: 1px solid white;
-        // background-color: red;
         position: relative;
         z-index: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        padding-top: 60px;
-        white-space: nowrap;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding-top: 50px;
 
+        
 
-        .addon-stream-container {
-            width: 95%;
+        .streams {
+            width: 100%;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
+            // margin-top: 30px;
+            margin-bottom: 50px;
 
+            overflow-y: scroll;
+            overflow-x: hidden;
 
-            .streams-container {
-                width: 100%;
+            &::-webkit-scrollbar {
+                width: 7px;
+            }
+
+            &::-webkit-scrollbar-track {
+                box-shadow: inset 0 0 6px #06121E;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: #090c18;
+                outline: 1px solid black;
+                border-radius: 10px;
+
+                &:hover {
+                    background-color: #0E2C4B;
+                }
+            }
+
+            &::-webkit-scrollbar-button {
+                width: 10px;
+            }
+
+            .addon-stream-container {
+                width: 95%;
                 height: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: center;
-
-                p {
-                    width: 97%;
-                    min-height: 60px;
-                    height: auto;
+    
+    
+                .streams-container {
+                    width: 100%;
+                    height: 100%;
                     display: flex;
+                    flex-direction: column;
                     justify-content: flex-start;
                     align-items: center;
-                    padding-left: 10%;
-                    margin-top: 10px;
-                    border: 1px solid white;
-                    cursor: pointer;
                     
+                    
+    
+                    .stream-container {
+                        width: 95%;
+                        min-height: 100px;
+                        height: auto;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: flex-start;
+                        border: 1px solid white;
+                        margin-top: 10px;
+                        padding-inline: 4%;
+                        cursor: pointer;
+                        
+                        .stream-name {
+                            width: 100%;
+                            display: inline-block;
+                            word-wrap: break-word;
+                            font-size: 15px;
+                        }
+                        p {
+                            width: 100%;
+                            display: inline-block;
+                            word-wrap: break-word;
+                            font-size: 14px;
+                        }
+                    }
                 }
             }
         }
+
         
     }
 
     
 
     .streams-spinner-container {
-        width: 20%;
+        min-width: 450px;
         height: 100%;
         display: flex;
         justify-content: center;
@@ -454,7 +502,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: #201F32;
+    background-color: #06121E;
     color: white;
     font-size: 36px;
     padding: 0;

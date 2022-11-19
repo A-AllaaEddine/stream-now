@@ -60,14 +60,14 @@ const Navigation = () => {
                     </Link >
                 </div>
                 <div className='search-container'>
-                    <form style={location.pathname === "/" ? { backgroundColor: '#0e2c4b'} : null}  className='search-input-container' onSubmit={handleSubmit}>
+                    <form style={location.pathname === "/" || location.pathname === "/discover" ? { backgroundColor: '#0e2c4b', border: '1px solid #0E2C4B'} : null}  className='search-input-container' onSubmit={handleSubmit}>
                         <input 
                         name='search'
                         type="text" 
                         value={searchInput}
                         placeholder='Search' 
                         onChange={handleChange}/>
-                        <button className='search-button' role="search-button">
+                        <button className='search-button' role="search">
                             <Search  type="submit" className='search-icon'  />
                         </button>
                     </form>

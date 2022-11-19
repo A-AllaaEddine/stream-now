@@ -1,6 +1,9 @@
 import './movie-card.styles.scss';
 
-const MovieCard = ({ movie, selectItem }) => {
+
+import { memo } from 'react';
+
+const MovieCard = memo(({ movie, selectItem }) => {
     return (
         <div  className='movie-card-container' onClick={() => selectItem(movie)}>
             <div  className='movie-image-container'>
@@ -11,6 +14,6 @@ const MovieCard = ({ movie, selectItem }) => {
             </div>
         </div>
     )
-}
+})
 
 export default MovieCard;

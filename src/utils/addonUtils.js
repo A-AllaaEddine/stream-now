@@ -71,6 +71,7 @@ export const GetMovieMetaFromAddon = async (url, data) => {
 
 }
 
+// get movie streams from addon
 export const GetMovieStreamsFromAddon = async (url, data) => {
     const { addonName, resource, type, id, extra } = data;
     var addonUrl = url.replace("/manifest.json", '');
@@ -105,6 +106,8 @@ export const GetCatalogsAndResources = async (url) => {
     return Data;
 }
 
+
+// get addon Data
 export const GetAddonData = async (url) => {
 
     const manifest = await Client.detectFromURL(url)
@@ -124,3 +127,64 @@ export const GetAddonData = async (url) => {
 
     return manifest;
 }
+
+
+// check if the adodn support the requested data
+export const isSupported = ( addon, resource, id ) => {
+    if(resource === "catalog") {
+        if(addon.data.resources.includes("catalog") || addon.data.catalogs.length > 0) {
+            const typeCatalog = addon.data.catalogs.map(cat => {
+                return {type: cat.type};
+            })
+            const ids = typeCatalog.map(o => o.type)
+            const filtered = typeCatalog.filter(({type}, index) => !ids.includes(type, index + 1))
+            
+            // console.log(filtered);
+            var types = [];
+            for (let typeCat of filtered) {
+                const type = addon.data.catalogs.filter(cat => {
+                    return cat.type === typeCat.type;
+                })
+                types.push({addonUrl: addon.addonUrl, addonName: addon.addonName, ...type[0]});
+            }
+            // console.log(types);
+    
+            // console.log([typeMovies[0], typeSeries[0]])
+            return types;
+        }
+    }
+    else if(resource === "meta") {
+        if((addon.data.resources.includes("meta") || addon.data.resources.some(res => res.name === "meta")) && (addon.data.resources.some(res => res.idPrefixes && res.idPrefixes.length > 0) || (addon.data.idPrefixes && addon.data.idPrefixes.length > 0))) {
+            var addonPrefix = [];
+            addon.data.resources && addon.data.resources.map(resource => {
+                if(resource.idPrefixes && resource.idPrefixes.length > 0) {
+                    addonPrefix.push(...resource.idPrefixes);
+                }
+            })
+            addon.data.idPrefixes && addon.data.idPrefixes.length > 0 && addonPrefix.push(...addon.data.idPrefixes)
+            if(addonPrefix.some(prefix => id.toLowerCase().startsWith(prefix.toLowerCase()))) {
+                return addon;
+            }
+        }
+    }
+    else if(resource === "stream") {
+        if((addon.data.resources.includes("stream") || addon.data.resources.some(res => res.name === "stream")) && (addon.data.resources.some(res => res.idPrefixes && res.idPrefixes.length > 0) || (addon.data.idPrefixes && addon.data.idPrefixes.length > 0))) {
+            let addonPrefix = [];
+            addon.data.resources && addon.data.resources.map(resource => {
+                if(resource.idPrefixes && resource.idPrefixes.length > 0) {
+                    addonPrefix.push(...resource.idPrefixes);
+                }
+            })
+            // console.log(addon);
+            if(addon.data.idPrefixes && addon.data.idPrefixes.length > 0 ) {
+                addonPrefix.push(...addon.data.idPrefixes)
+            }
+            // addonPrefix = addonPrefix.filter(addonPre => { return addonPre !== undefined});
+            if(addonPrefix.some(prefix => id.toLowerCase().startsWith(prefix.toLowerCase()))) {
+                // console.log(addonPrefix);
+                return addon;
+            }
+        }
+    }
+}
+

@@ -17,6 +17,7 @@ const CATALOG_INITIAL_STATE = {
         'https://2ecbbd610840-trakt.baby-beamup.club/manifest.json',
         'https://3bf59d9737bf-mycimaaddonbylazydzv.baby-beamup.club/manifest.json',
         'https://2ecbbd610840-kisskh.baby-beamup.club/manifest.json',
+        'https://torrentio.strem.fun/manifest.json'
 ],
     isLoading: false,
     isMetaLoading: false,
