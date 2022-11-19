@@ -2,38 +2,29 @@
 
 
 .spinner-container {
-    height: 100%;
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #06121E;
-    padding-top: 100px;
     padding-top: 45px;
 }
 
 
-.home-container {
-    height: 100%;
+.search-results-container {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     background-color: #06121E;
     color: white;
-    // padding-bottom: 20px;
+    padding-bottom: 20px;
     margin: 0;
     position: relative;
-    padding-top: 45px;
 
-    
-
-
-
-
-    
-    
     
 
     .items-container {
@@ -49,7 +40,6 @@
         scroll-snap-type: y mandatory;
         scroll-padding-inline: auto;
         padding-bottom: 70px;
-        margin-top: 20px;
 
         transition: 0.5s;
 
@@ -87,9 +77,6 @@
             padding-left: 20px;
         }
 
-
-        
-
         .addon-items-container {
             width: 100%;
             height: auto;
@@ -121,9 +108,10 @@
                     // display: grid;
                     // gap: 1px;
                     // grid-auto-flow: column;
-        
+                    // grid-template-columns: auto;
                     // overscroll-behavior-inline: contain;
                     // scroll-padding-inline: auto;
+        
         
         
                     &::-webkit-scrollbar {
