@@ -1,6 +1,6 @@
 import './App.scss';
 
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 // import Navigation from './routes/navigation/navigation.component';
 // import Home from './routes/home/home.component';
@@ -22,6 +22,7 @@ const MovieMeta = lazy(() => import('./routes/movie-meta/movie-meta.component'))
 const Search = lazy(() => import('./routes/search/search.component'));
 const PageNotFound = lazy(() => import('./routes/page-not-found/page-not-found.component'));
 const MediaPlayer = lazy(() => import('./routes/media-player/media-player.component'));
+const AddonsPage = lazy(() => import('./routes/addons/addons.component'));
 
 
 
@@ -29,11 +30,10 @@ const MediaPlayer = lazy(() => import('./routes/media-player/media-player.compon
 const App = () => {
   const AddonsUrls = useSelector(selectAddosnUrls);
   const dispatch = useDispatch();
-  const location = useLocation();
 
   useEffect(() => {
     dispatch(fetchAddonDataStart(AddonsUrls));
-}, [location.pathname]);
+}, [AddonsUrls]);
   return (
       <div className='App'>
         <Suspense>
@@ -44,6 +44,7 @@ const App = () => {
               <Route path='details/:addonUrl/:type/:id' element={<MovieMeta />} />
               <Route path='search=:searchParam' element={<Search />} />
               <Route path='player/:streamUrl' element={<MediaPlayer />} />
+              <Route path='addons' element={<AddonsPage />} />
               <Route path="*" element={<PageNotFound />} />
             </Route>
           </Routes>

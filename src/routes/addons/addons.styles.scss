@@ -1,59 +1,45 @@
-.spinner-container {
-    width: 100%;
+.addons-spinner-container {
     height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #06121E;
+    padding-top: 100px;
     padding-top: 45px;
 }
 
-.discover-container {
 
+.addons-container {
+    height: 100%;
     width: 100%;
-    height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    justify-content: space-between;
+    align-items: center;
     background-color: #06121E;
     color: white;
-    padding-bottom: 20px;
-    overflow-y: hidden;
-    padding-top: 45px;
+    // padding-bottom: 20px;
+    margin: 0;
+    position: relative;
+    padding-top: 70px;
+    
 
-
-    .discover-spinner-container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #06121E;
-    }
-
-
-    .types-subtypes-container {
+    .addons-genres-container {
         margin-top: 10px;
         width: 100%;
         height: 80px;
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        padding-left: 5%;
+        padding-left: 11%;
 
 
-        .types-container {
-            width: 150px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-
-            .types-nav {
-                width: 120px;
+            .addons-categories-nav {
+                width: 170px;
                 position: relative;
                 cursor: pointer;
+                
 
                 li {
                     list-style: none;
@@ -61,7 +47,83 @@
                     
                 }
 
-                .types-button {
+                .addon-categories-button {
+                    width: 170px;
+                    height: 40px;
+                    background-color: #0E2C4B;
+                    // box-shadow: 5px 5px 15px -5px #000;
+                    border-radius: 5px;
+                    border: none;
+                    color: white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                }
+
+                .addon-categories-list {
+                    position: absolute;
+                    transform: scaleY(0);
+                    transform-origin: top;
+                    transition: .3s;
+                    background-color: rgba(0, 0, 0, 0.6);
+                    width: 170px;
+                    height: auto;
+                    max-height: 150px;
+                    overflow-y: scroll;
+                    z-index: 2;
+
+                    &::-webkit-scrollbar {
+                        width: 7px;
+                    }
+            
+                    &::-webkit-scrollbar-track {
+                        box-shadow: inset 0 0 6px #06121E;
+                    }
+            
+                    &::-webkit-scrollbar-thumb {
+                        background-color: #090c18;
+                        outline: 1px solid black;
+                        border-radius: 10px;
+                        
+                        &:hover {
+                            background-color: #0E2C4B;
+                        }
+                    }
+                    
+        
+                    &::-webkit-scrollbar-button {
+                        width: 1px;
+                    }
+
+                    .addon-category-item {
+                        padding: 10px;
+                        white-space: nowrap;
+
+                        &:hover {
+                            background-color: #323942;
+                        }
+                    }
+
+                    &.toggled {
+                            transform: scaleY(1);
+                    }
+                }
+            }
+            
+            
+            .addons-types-nav {
+                width: 120px;
+                position: relative;
+                cursor: pointer;
+                margin-left: 30px;
+
+                li {
+                    list-style: none;
+
+                }
+
+                .addon-types-button {
                     width: 120px;
                     height: 40px;
                     background-color: #0E2C4B;
@@ -72,9 +134,10 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    cursor: pointer;
                 }
 
-                .types-list {
+                .addon-types-list {
                     position: absolute;
                     transform: scaleY(0);
                     transform-origin: top;
@@ -108,7 +171,7 @@
                         width: 1px;
                     }
 
-                    .type-item {
+                    .addon-type-item {
                         padding: 10px;
 
                         &:hover {
@@ -121,186 +184,37 @@
                     }
                 }
             }
-        }
 
-
-
-        .SubTypes-container {
-            width: 150px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             
-            
-            // .SubTypes {
-            //     height: 100%;
-            //     width: 100%;
-            //     display: flex;
-            //     align-items: center;
-            //     justify-content: flex-start;
-            //     overflow-x: scroll;
-    
-            //     &::-webkit-scrollbar {
-            //         height: 5px;
-            //     }
-        
-            //     &::-webkit-scrollbar-track {
-            //         box-shadow: inset 0 0 6px #06121E;
-            //     }
-        
-            //     &::-webkit-scrollbar-thumb {
-            //         background-color: #090c18;
-            //         outline: 1px solid black;
-            //         border-radius: 10px;
-        
-            //         &:hover {
-            //             background-color: #0E2C4B;
-            //         }
-            //     }
-        
-            //     &::-webkit-scrollbar-button {
-            //         width: 10px;
-            //     }
-    
-    
-    
-            //     .subtype {
-            //         min-width: 120px;
-            //         height: 15px;
-            //         display: flex;
-            //         align-items: center;
-            //         padding-left: 3px;
-            //         border-left: 1px solid white;
-            //         white-space: nowrap;
-            //         overflow: hidden;
-            //         text-overflow: clip;
-            //         margin-left: 10px;
-    
 
-            //         &.checked {
-            //             color: #207fdd;
-            //         }
-    
-            //         &:hover {
-            //             color: #207fdd;
-            //         }
-            //     }
-            // }
-
-            .SubTypes-nav {
-                // margin-top: 10px;
-                width: 120px;
-                position: relative;
-                cursor: pointer;
-
-                li {
-                    list-style: none;
-
-                    
-                }
-
-                .SubTypes-button {
-                    width: 120px;
-                    height: 40px;
-                    background-color: #0E2C4B;
-                    // box-shadow: 5px 5px 15px -5px #000;
-                    border-radius: 5px;
-                    border: none;
-                    color: white;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-
-                .SubTypes-list {
-                    position: absolute;
-                    transform: scaleY(0);
-                    transform-origin: top;
-                    transition: .3s;
-                    background-color: rgba(0, 0, 0, 0.6);
-                    width: 120px;
-                    height: 150px;
-                    overflow-y: scroll;
-                    z-index: 2;
-
-                    &::-webkit-scrollbar {
-                        width: 7px;
-                    }
-            
-                    &::-webkit-scrollbar-track {
-                        box-shadow: inset 0 0 6px #06121E;
-                    }
-            
-                    &::-webkit-scrollbar-thumb {
-                        background-color: #090c18;
-                        outline: 1px solid black;
-                        border-radius: 10px;
-                        
-                        &:hover {
-                            background-color: #323942;
-                        }
-                    }
-                    
-        
-                    &::-webkit-scrollbar-button {
-                        width: 1px;
-                    }
-
-                    .SubTypes-item {
-                        padding: 10px;
-
-                        &:hover {
-                            background-color: lightblue;
-                        }
-                    }
-
-                    &.toggled {
-                            transform: scaleY(1);
-                    }
-                }
+            input {
+                width: 200px;
+                height: 40px;
+                background-color: #0e2c4b;
+                border-radius: 5px;
+                border: none;
+                outline: none;
+                margin-left: 15px;
+                padding-left: 5px;
+                color: white;
             }
-        }
         
-    
-        }
-    
+    }
 
-    .items-container {
-        width: 100%;
-        height: 99%;
-        padding-inline: 10px;
-        padding-top: 50px;
-        margin-top: 20px;
-        // flex-shrink: 0;
-
-        // display: grid;
-        // grid-template-columns: repeat(9, 1fr);
-        // column-gap: 1px;
-        // row-gap: 30px;
-
+    .addons-list-container {
+        width: 80%;
+        height: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
         display: flex;
-        flex-flow: row wrap;
-        justify-content: center;
-
-        overflow-y: auto;
-        overscroll-behavior-y: contain;
-        // scroll-snap-type: y mandatory;
-        scroll-padding-inline: 15px;
-        position: relative;
-
-        // transition: 0.5s;
-
-        &.isScrolling {
-            height: 99%;
-        }
-
-        &.clicked {
-            height: 30%;
-        }
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 40px;
 
         &::-webkit-scrollbar {
-            width: 7px;
+            width: 8px;
         }
 
         &::-webkit-scrollbar-track {
@@ -321,23 +235,63 @@
             width: 10px;
         }
 
-        
 
-    }
+        .addon-container {
+            width: 98%;
+            min-height: 150px;
+            max-height: 150px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-top: 20px;
+            border-radius: 5px;
+            background-color: #0E2C4B;
+            cursor: pointer;
 
-    .no-items-container {
-        width: 100%;
-        height: 99%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+            
 
-    .items-spinner-container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+            .addon-logo-container {
+                width: 200px;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img {
+                    width: 80%;
+                    height: 80%;
+                }
+            }
+
+
+            .addon-info {
+                width: 80%;
+                height: 100%;
+                margin-bottom: 5px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                margin-left: 10px;
+                
+                
+                .addon-description {
+                    width: 80%;
+                    height: 50px;
+                    font-size: 15px;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    word-break: break-all;
+                    overflow-y: hidden;
+                }
+
+                p {
+                    margin: 0;
+                    padding: 0;
+                    margin-top: 5px;
+                }
+            }
+        }
     }
 }

@@ -102,6 +102,12 @@ export const catalogReducer = (state = CATALOG_INITIAL_STATE, action) => {
                 MovieStreams: payload,
                 isStreamLoading: false
             }
+        case CATALOG_ACTION_TYPE.ADD_ADDON_TO_REDUCER:
+        case CATALOG_ACTION_TYPE.REMOVE_ADDON_TO_REDUCER:
+            return {
+                ...state,
+                AddonsUrls: payload
+            }
         default:
             return state;
     }

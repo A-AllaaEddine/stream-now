@@ -1,19 +1,17 @@
 import './discover.styles.scss';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-// import MovieDetails from '../../components/movie-details/movie-details.component';
 import ItemDetails from '../../components/item-details/items-details.component';
 import MovieCard from '../../components/movie-card/movie-card.component';
 import Spinner from '../../components/Spinner/spinner.component';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { selectAddonsTypesCatalogs, selectTypeCatalog, selectIsLoading, selectAddonsTypes, selectDefaultTypesCatalogs } from '../../store/catalog/catalog.selectors';
+import { selectAddonsTypesCatalogs, selectTypeCatalog, selectIsLoading, selectDefaultTypesCatalogs } from '../../store/catalog/catalog.selectors';
 import { fetchTypeCatalogsStart } from '../../store/catalog/catalog.actions.js';
-import { type } from '@testing-library/user-event/dist/type';
 
 
 
@@ -33,7 +31,6 @@ const Discover = () => {
 
     const AddonsTypesCatalogs = useSelector(selectAddonsTypesCatalogs);
     const DefaultAddonTypes = useSelector(selectDefaultTypesCatalogs);
-    const AddonsTypes = useSelector(selectAddonsTypes);
     const TypeCatalogs = useSelector(selectTypeCatalog);
     const isLoading = useSelector(selectIsLoading);
 
@@ -52,7 +49,7 @@ const Discover = () => {
         const ids = types.map(o => o.type)
         const filtered = types.filter(({type}, index) => !ids.includes(type, index + 1))
         setTypes(filtered);
-    }, [AddonsTypes])
+    }, [DefaultAddonTypes])
     
 
 
@@ -63,19 +60,19 @@ const Discover = () => {
             const t =  addon[selectedType];
             // console.log(t);
             const addonUrl = addon["addonUrl"];
-            {
-                if (t) {
-                    for (let i = 0; i< t.length; i++) {
-                        // console.log(t[i]);
-                        subtypes.push({addonUrl: addonUrl, ...t[i]});
-                    }
-                }}
+            
+            if (t) {
+                for (let i = 0; i< t.length; i++) {
+                    // console.log(t[i]);
+                    subtypes.push({addonUrl: addonUrl, ...t[i]});
+                }
+            }
         })
         const ids = subtypes.map(o => o.id)
         const filtered = subtypes.filter(({id}, index) => !ids.includes(id, index + 1))
         // console.log(subtypes[0]);
         setSubTypes(filtered);
-        { filtered[0] && setSelectedSubType(filtered[0].name)}
+         filtered[0] && setSelectedSubType(filtered[0].name)
     }, [selectedType, AddonsTypesCatalogs])
 
 

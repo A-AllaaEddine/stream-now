@@ -1,5 +1,4 @@
 
-import { type } from "@testing-library/user-event/dist/type";
 import { createSelector } from "reselect";
 export const selectCatalog = (state) => state.catalog;
 
@@ -28,24 +27,6 @@ export const selectAddosnUrls = createSelector(
     (catalog) => catalog.AddonsUrls
 )
 
-// select catalogs from reducers
-// export const selectCatalogs = createSelector(
-//     [selectCatalog],
-//     (catalog) => catalog.catalogs
-// )
-
-
-// select addon resources
-// export const selectAddonsResources = createSelector(
-//     [selectAddonsData],
-//     (AddonData) => AddonData.resources
-// )
-
-// select addon catalogs
-// export const selectAddonCatalogs = createSelector(
-//     [selectCatalog],
-//     (catalog) => catalog.addonCatalogs
-// )
 
 
 // select all types name from every addon
