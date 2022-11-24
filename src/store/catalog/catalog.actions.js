@@ -2,6 +2,19 @@ import { createAction } from '../../utils/reducer.utils';
 import { CATALOG_ACTION_TYPE } from './catalog.types';
 // import { createAction } from '@reduxjs/toolkit';
 
+// Add addon url to reducer
+export const addAddonToReducer = (AddonsUrls, AddonUrlToAdd) => {
+    const newAddonsUrls = [...AddonsUrls, AddonUrlToAdd]
+    return createAction(CATALOG_ACTION_TYPE.ADD_ADDON_TO_REDUCER, newAddonsUrls)
+}
+
+// remove addon url to reducer
+export const removeAddonToReducer = (AddonsUrls, AddonUrlToAdd) => {
+    const newAddonsUrls = AddonsUrls.filter(addon => { return addon !== AddonUrlToAdd});
+    return createAction(CATALOG_ACTION_TYPE.REMOVE_ADDON_TO_REDUCER, newAddonsUrls)
+}
+
+
 // fetch home catalogs
 export const fetchCatalogMetasStart = (data) => {
     return createAction(CATALOG_ACTION_TYPE.FETCH_CATALOG_METAS_START, data)

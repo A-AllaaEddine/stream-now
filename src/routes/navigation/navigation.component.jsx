@@ -8,11 +8,8 @@ import { ReactComponent as Search } from '../../assets/Search.svg';
 import Feed from '../../assets/Feed.png';
 import Discover from '../../assets/Discover.png';
 import Library from '../../assets/Library.png';
-import StremioLogo from '../../assets/StremioLogo2.png';
-import Settings from '../../assets/setting.png';
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 
 
 
@@ -21,11 +18,7 @@ const Navigation = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    useEffect(() => {
-        if(location.pathname === "/") {
-
-        }
-    }, [location.pathname])
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -60,7 +53,13 @@ const Navigation = () => {
                     </Link >
                 </div>
                 <div className='search-container'>
-                    <form style={location.pathname === "/" || location.pathname === "/discover" ? { backgroundColor: '#0e2c4b', border: '1px solid #0E2C4B'} : null}  className='search-input-container' onSubmit={handleSubmit}>
+                    <form style={
+                        location.pathname === "/" || 
+                        location.pathname.includes("/discover") || 
+                        location.pathname.includes("/my-library") || 
+                        location.pathname.includes("/account") ? 
+                        { backgroundColor: '#0e2c4b', border: '1px solid #0E2C4B'} : {display: "none"}}  className='search-input-container' onSubmit={handleSubmit}
+                    >
                         <input 
                         name='search'
                         type="text" 
