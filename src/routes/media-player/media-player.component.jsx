@@ -1,32 +1,29 @@
-import './media-player.styles.scss';
+import "./media-player.styles.scss";
 
-import ReactPlayer from 'react-player/lazy'
+import ReactPlayer from "react-player/lazy";
 
-import { useState } from 'react';
-
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
 const MediaPlayer = () => {
-  
+  const { streamUrl, type } = useParams();
 
-    const { streamUrl } = useParams();
-    const url = decodeURIComponent(streamUrl.replaceAll("~","%"));
-    // console.log(url);
+  console.log(streamUrl);
+  var url;
+  if (type === "trailer") {
+    url = `https://www.youtube.com/embed/${streamUrl}?controls=0&showinfo=0&enablejsapi=1&fs=0&iv_load_policy=3&modestbranding=1&autoplay=0&rel=0&html5=1`;
+  } else {
+    url = decodeURIComponent(streamUrl.replaceAll("~", "%"));
+  }
 
-    return (
-        <div className='media-player-container'>
-            {/* <video className='video-player'    width='100' >
-                <source src={url}  type="video/mp4"/>
-            </video> */}
-           <ReactPlayer 
-                width="1080px"
-                height="720px"
-                controls
-                url={`${url}`}
-           />
-           {/* <iframe src="https://www.youtube.com/watch?v=vOSpZwftRhg&ab_channel=AlmightyJava" width="640" height="480" ></iframe> */}
-        </div>
-    )
-}
+  return (
+    <div className="media-player-container">
+      {type === "trailer" ? (
+        <ReactPlayer width="1080px" height="720px" controls url={`${url}`} />
+      ) : (
+        <p>Player is disactivated for streams....</p>
+      )}
+    </div>
+  );
+};
 
 export default MediaPlayer;
