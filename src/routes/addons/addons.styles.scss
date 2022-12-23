@@ -1,297 +1,276 @@
 .addons-spinner-container {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #06121E;
-    padding-top: 100px;
-    padding-top: 45px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #06121e;
+  padding-top: 100px;
+  padding-top: 45px;
 }
 
-
 .addons-container {
-    height: 100%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #06121e;
+  color: white;
+  margin: 0;
+  position: relative;
+  padding-top: 70px;
+
+  .addons-genres-container {
+    margin-top: 10px;
     width: 100%;
+    height: 80px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    background-color: #06121E;
-    color: white;
-    // padding-bottom: 20px;
-    margin: 0;
-    position: relative;
-    padding-top: 70px;
-    
+    padding-left: 11%;
 
-    .addons-genres-container {
-        margin-top: 10px;
-        width: 100%;
-        height: 80px;
+    .addons-categories-nav {
+      width: 170px;
+      position: relative;
+      cursor: pointer;
+
+      li {
+        list-style: none;
+      }
+
+      .addon-categories-button {
+        width: 170px;
+        height: 40px;
+        background-color: #0e2c4b;
+        border-radius: 5px;
+        border: none;
+        color: white;
         display: flex;
-        justify-content: flex-start;
         align-items: center;
-        padding-left: 11%;
+        justify-content: center;
+        cursor: pointer;
+      }
 
-
-            .addons-categories-nav {
-                width: 170px;
-                position: relative;
-                cursor: pointer;
-                
-
-                li {
-                    list-style: none;
-
-                    
-                }
-
-                .addon-categories-button {
-                    width: 170px;
-                    height: 40px;
-                    background-color: #0E2C4B;
-                    // box-shadow: 5px 5px 15px -5px #000;
-                    border-radius: 5px;
-                    border: none;
-                    color: white;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    cursor: pointer;
-                }
-
-                .addon-categories-list {
-                    position: absolute;
-                    transform: scaleY(0);
-                    transform-origin: top;
-                    transition: .3s;
-                    background-color: rgba(0, 0, 0, 0.6);
-                    width: 170px;
-                    height: auto;
-                    max-height: 150px;
-                    overflow-y: scroll;
-                    z-index: 2;
-
-                    &::-webkit-scrollbar {
-                        width: 7px;
-                    }
-            
-                    &::-webkit-scrollbar-track {
-                        box-shadow: inset 0 0 6px #06121E;
-                    }
-            
-                    &::-webkit-scrollbar-thumb {
-                        background-color: #090c18;
-                        outline: 1px solid black;
-                        border-radius: 10px;
-                        
-                        &:hover {
-                            background-color: #0E2C4B;
-                        }
-                    }
-                    
-        
-                    &::-webkit-scrollbar-button {
-                        width: 1px;
-                    }
-
-                    .addon-category-item {
-                        padding: 10px;
-                        white-space: nowrap;
-
-                        &:hover {
-                            background-color: #323942;
-                        }
-                    }
-
-                    &.toggled {
-                            transform: scaleY(1);
-                    }
-                }
-            }
-            
-            
-            .addons-types-nav {
-                width: 120px;
-                position: relative;
-                cursor: pointer;
-                margin-left: 30px;
-
-                li {
-                    list-style: none;
-
-                }
-
-                .addon-types-button {
-                    width: 120px;
-                    height: 40px;
-                    background-color: #0E2C4B;
-                    // box-shadow: 5px 5px 15px -5px #000;
-                    border-radius: 5px;
-                    border: none;
-                    color: white;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    cursor: pointer;
-                }
-
-                .addon-types-list {
-                    position: absolute;
-                    transform: scaleY(0);
-                    transform-origin: top;
-                    transition: .3s;
-                    background-color: rgba(0, 0, 0, 0.6);
-                    width: 120px;
-                    height: 150px;
-                    overflow-y: scroll;
-                    z-index: 2;
-
-                    &::-webkit-scrollbar {
-                        width: 7px;
-                    }
-            
-                    &::-webkit-scrollbar-track {
-                        box-shadow: inset 0 0 6px #06121E;
-                    }
-            
-                    &::-webkit-scrollbar-thumb {
-                        background-color: #090c18;
-                        outline: 1px solid black;
-                        border-radius: 10px;
-                        
-                        &:hover {
-                            background-color: #0E2C4B;
-                        }
-                    }
-                    
-        
-                    &::-webkit-scrollbar-button {
-                        width: 1px;
-                    }
-
-                    .addon-type-item {
-                        padding: 10px;
-
-                        &:hover {
-                            background-color: #323942;
-                        }
-                    }
-
-                    &.toggled {
-                            transform: scaleY(1);
-                    }
-                }
-            }
-
-            
-
-            input {
-                width: 200px;
-                height: 40px;
-                background-color: #0e2c4b;
-                border-radius: 5px;
-                border: none;
-                outline: none;
-                margin-left: 15px;
-                padding-left: 5px;
-                color: white;
-            }
-        
-    }
-
-    .addons-list-container {
-        width: 80%;
-        height: 100%;
+      .addon-categories-list {
+        position: absolute;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: 0.3s;
+        background-color: rgba(0, 0, 0, 0.6);
+        width: 170px;
+        height: auto;
+        max-height: 150px;
         overflow-y: scroll;
-        overflow-x: hidden;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        margin-top: 10px;
-        margin-bottom: 40px;
+        z-index: 2;
 
         &::-webkit-scrollbar {
-            width: 8px;
+          width: 7px;
         }
 
         &::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 6px #06121E;
+          box-shadow: inset 0 0 6px #06121e;
         }
 
         &::-webkit-scrollbar-thumb {
-            background-color: #090c18;
-            outline: 1px solid black;
-            border-radius: 10px;
+          background-color: #090c18;
+          outline: 1px solid black;
+          border-radius: 10px;
 
-            &:hover {
-                background-color: #0E2C4B;
-            }
+          &:hover {
+            background-color: #0e2c4b;
+          }
         }
 
         &::-webkit-scrollbar-button {
-            width: 10px;
+          width: 1px;
         }
 
+        .addon-category-item {
+          padding: 10px;
+          white-space: nowrap;
 
-        .addon-container {
-            width: 98%;
-            min-height: 150px;
-            max-height: 150px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            margin-top: 20px;
-            border-radius: 5px;
-            background-color: #0E2C4B;
-            cursor: pointer;
-
-            
-
-            .addon-logo-container {
-                width: 200px;
-                height: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                img {
-                    width: 80%;
-                    height: 80%;
-                }
-            }
-
-
-            .addon-info {
-                width: 80%;
-                height: 100%;
-                margin-bottom: 5px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: flex-start;
-                margin-left: 10px;
-                
-                
-                .addon-description {
-                    width: 80%;
-                    height: 50px;
-                    font-size: 15px;
-                    display: flex;
-                    justify-content: flex-start;
-                    align-items: flex-start;
-                    word-break: break-all;
-                    overflow-y: hidden;
-                }
-
-                p {
-                    margin: 0;
-                    padding: 0;
-                    margin-top: 5px;
-                }
-            }
+          &:hover {
+            background-color: #323942;
+          }
         }
+
+        &.toggled {
+          transform: scaleY(1);
+        }
+      }
     }
+
+    .addons-types-nav {
+      width: 120px;
+      position: relative;
+      cursor: pointer;
+      margin-left: 30px;
+
+      li {
+        list-style: none;
+      }
+
+      .addon-types-button {
+        width: 120px;
+        height: 40px;
+        background-color: #0e2c4b;
+        border-radius: 5px;
+        border: none;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      .addon-types-list {
+        position: absolute;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: 0.3s;
+        background-color: rgba(0, 0, 0, 0.6);
+        width: 120px;
+        height: 150px;
+        overflow-y: scroll;
+        z-index: 2;
+
+        &::-webkit-scrollbar {
+          width: 7px;
+        }
+
+        &::-webkit-scrollbar-track {
+          box-shadow: inset 0 0 6px #06121e;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: #090c18;
+          outline: 1px solid black;
+          border-radius: 10px;
+
+          &:hover {
+            background-color: #0e2c4b;
+          }
+        }
+
+        &::-webkit-scrollbar-button {
+          width: 1px;
+        }
+
+        .addon-type-item {
+          padding: 10px;
+
+          &:hover {
+            background-color: #323942;
+          }
+        }
+
+        &.toggled {
+          transform: scaleY(1);
+        }
+      }
+    }
+
+    input {
+      width: 200px;
+      height: 40px;
+      background-color: #0e2c4b;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      margin-left: 15px;
+      padding-left: 5px;
+      color: white;
+    }
+  }
+
+  .addons-list-container {
+    width: 80%;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 40px;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px #06121e;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #090c18;
+      outline: 1px solid black;
+      border-radius: 10px;
+
+      &:hover {
+        background-color: #0e2c4b;
+      }
+    }
+
+    &::-webkit-scrollbar-button {
+      width: 10px;
+    }
+
+    .addon-container {
+      width: 98%;
+      min-height: 150px;
+      max-height: 150px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 20px;
+      border-radius: 5px;
+      background-color: #0e2c4b;
+      cursor: pointer;
+
+      .addon-logo-container {
+        width: 200px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 80%;
+          height: 80%;
+        }
+      }
+
+      .addon-info {
+        width: 80%;
+        height: 100%;
+        margin-bottom: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        margin-left: 10px;
+
+        .addon-description {
+          width: 80%;
+          height: 50px;
+          font-size: 15px;
+          display: flex;
+          justify-content: flex-start;
+          align-items: flex-start;
+          word-break: break-all;
+          overflow-y: hidden;
+        }
+
+        p {
+          margin: 0;
+          padding: 0;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
 }

@@ -1,160 +1,125 @@
-
-
-
 .spinner-container {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #06121E;
-    padding-top: 100px;
-    padding-top: 45px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #06121e;
+  padding-top: 100px;
+  padding-top: 45px;
 }
 
-
 .home-container {
-    height: 100%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: #06121e;
+  color: white;
+  margin: 0;
+  position: relative;
+  padding-top: 45px;
+
+  .items-container {
     width: 100%;
+    height: 99%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    background-color: #06121E;
-    color: white;
-    // padding-bottom: 20px;
-    margin: 0;
-    position: relative;
-    padding-top: 45px;
+    overflow-y: scroll;
+    gap: 10px;
 
-    
+    overscroll-behavior-y: contain;
+    scroll-snap-type: y mandatory;
+    scroll-padding-inline: auto;
+    padding-bottom: 70px;
+    margin-top: 20px;
 
+    transition: 0.5s;
 
+    &.isScrolling {
+      height: 99%;
+    }
 
+    &.clicked {
+      height: 50%;
+    }
 
-    
-    
-    
+    &::-webkit-scrollbar {
+      width: 7px;
+    }
 
-    .items-container {
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px #06121e;
+    }
 
+    &::-webkit-scrollbar-thumb {
+      background-color: #090c18;
+      outline: 1px solid black;
+      border-radius: 10px;
+
+      &:hover {
+        background-color: #0e2c4b;
+      }
+    }
+
+    &::-webkit-scrollbar-button {
+      width: 10px;
+    }
+
+    h2 {
+      padding-left: 20px;
+    }
+
+    .addon-items-container {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+
+      .movies-container {
         width: 100%;
-        height: 99%;
+        height: 450px;
         display: flex;
         flex-direction: column;
-        overflow-y: scroll;
-        gap: 10px;
+        justify-content: space-around;
+        align-items: flex-start;
+        padding-top: 20px;
+        padding-inline: 10px;
 
-        overscroll-behavior-y: contain;
-        scroll-snap-type: y mandatory;
-        scroll-padding-inline: auto;
-        padding-bottom: 70px;
-        margin-top: 20px;
+        .movies-list-container {
+          width: 100%;
+          height: 100%;
+          padding-top: 20px;
+          overflow-y: hidden;
+          overflow-x: scroll;
+          scroll-snap-type: inline mandatory;
+          display: flex;
 
-        transition: 0.5s;
+          &::-webkit-scrollbar {
+            height: 6px;
+          }
 
-        &.isScrolling {
-            height: 99%;
-        }
+          &::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 6px #06121e;
+          }
 
-        &.clicked {
-            height: 50%;
-        }
-
-        &::-webkit-scrollbar {
-            width: 7px;
-        }
-
-        &::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 6px #06121E;
-        }
-
-        &::-webkit-scrollbar-thumb {
+          &::-webkit-scrollbar-thumb {
             background-color: #090c18;
             outline: 1px solid black;
             border-radius: 10px;
 
             &:hover {
-                background-color: #0E2C4B;
+              background-color: #0e2c4b;
             }
-        }
+          }
 
-        &::-webkit-scrollbar-button {
+          &::-webkit-scrollbar-button {
             width: 10px;
+          }
         }
-
-        h2 {
-            padding-left: 20px;
-        }
-
-
-        
-
-        .addon-items-container {
-            width: 100%;
-            height: auto;
-            display: flex;
-            flex-direction: column;
-
-            .movies-container {
-                width: 100%;
-                height: 450px;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-                align-items: flex-start;
-                // scroll-snap-align: start;
-                padding-top: 20px;
-                padding-inline: 10px;
-        
-        
-        
-                .movies-list-container {
-                    width: 100%;
-                    height: 100%;
-                    padding-top: 20px;
-                    overflow-y: hidden;
-                    overflow-x: scroll;
-                    scroll-snap-type: inline mandatory;
-                    display: flex;
-        
-                    // display: grid;
-                    // gap: 1px;
-                    // grid-auto-flow: column;
-        
-                    // overscroll-behavior-inline: contain;
-                    // scroll-padding-inline: auto;
-        
-        
-                    &::-webkit-scrollbar {
-                        height: 6px;
-                    }
-            
-                    &::-webkit-scrollbar-track {
-                        box-shadow: inset 0 0 6px #06121E;
-                    }
-            
-                    &::-webkit-scrollbar-thumb {
-                        background-color: #090c18;
-                        outline: 1px solid black;
-                        border-radius: 10px;
-                        
-                        &:hover {
-                            background-color: #0E2C4B;
-                        }
-                    }
-                    
-        
-                    &::-webkit-scrollbar-button {
-                        width: 10px;
-                    }
-                    
-        
-                }
-        
-            }
-        }
-        
+      }
     }
-
+  }
 }
