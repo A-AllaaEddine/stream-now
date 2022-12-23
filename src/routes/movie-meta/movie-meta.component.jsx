@@ -32,14 +32,11 @@ const MovieMeta = () => {
   var AddonUrl = decodeURIComponent(addonUrl.replaceAll("~", "%"));
   var MovieMetas = useSelector(selectMovieMetas);
   var MovieStreams = useSelector(selectMovieStreams);
-  // console.log(MovieMetas);
   const AddonsData = useSelector(selectAddonsData);
   const isLoading = useSelector(selectIsMetaLoading);
   const isStreamLoading = useSelector(selectIsStreamLoading);
   const dispatch = useDispatch();
   const movie = MovieMetas[1];
-  // var streams = MovieStreams[1];
-  // console.log(movie);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,10 +52,8 @@ const MovieMeta = () => {
   }, [movie]);
 
   useEffect(() => {
-    // console.log(seasonEpisodes);
     if (movie && movie.videos && movie.videos.length > 0) {
       var seasons = [];
-      // var seasonEpisodes = [];
       movie.videos.map((video) => {
         if (!seasons.includes(video.season)) {
           seasons.push(video.season);
@@ -91,7 +86,6 @@ const MovieMeta = () => {
   };
 
   const selectEpisode = (episode) => {
-    // streams = [];
     setSelectedEpisode(episode);
   };
 
@@ -100,7 +94,6 @@ const MovieMeta = () => {
       "%2F",
       "~2F"
     );
-    // console.log(encodedStreamUrl);
     navigate(`/player/stream/${encodedStreamUrl}`);
   };
 
@@ -134,7 +127,6 @@ const MovieMeta = () => {
                       <p className="movie-runtime">{movie.runtime}</p>
                     )}
                     <div className="movie-genre-container">
-                      {/* <p className='movie-genre'>{movie.genre && movie.genre}</p> */}
                       {movie.genres &&
                         movie.genres.map((genre) => {
                           return (
@@ -150,7 +142,6 @@ const MovieMeta = () => {
                   </div>
                   {(movie.summary || movie.description) && (
                     <div className="movie-summary-container">
-                      {/* <p className='movie-summary'>Summary</p> */}
                       <p>{movie.summary || movie.description}</p>
                     </div>
                   )}

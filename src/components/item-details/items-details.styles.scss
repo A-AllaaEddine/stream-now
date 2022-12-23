@@ -1,204 +1,189 @@
 .popup-display {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.95);
+
+  z-index: 2;
+
+  .display {
+    width: 0%;
+    height: 0%;
+    overflow-y: scroll;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
     position: absolute;
-    top: 0;
-    left: 0;
-    visibility: hidden;
-    background-color: rgba(0, 0, 0, 0.95);
-    
+    z-index: 3;
+    background-size: cover;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 3px 3px 15px #000;
 
-    z-index: 2;
+    &.clicked {
+      z-index: 3;
+      transition: 0.4s;
+      width: 60%;
+      height: 70%;
+      overflow: hidden;
 
-    .display {
-        width: 0%;
-        height: 0%;
-        overflow-y: scroll;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-end;
-        // background-color: #06121E;
+      .img-background {
         position: absolute;
-        z-index: 3;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        background-image: linear-gradient(
+          to top,
+          rgba(245, 246, 252, 0),
+          #090c18
+        );
         background-size: cover;
         color: white;
-        border-radius: 5px;
-        box-shadow: 3px 3px 15px #000;
-        
-        
-        
-        
-        &.clicked {
-            // background-image: linear-gradient(to top, rgba(245, 246, 252, 0), #090c18);
-            z-index: 3;
-            transition: 0.4s;
-            width: 60%;
-            height: 70%;
-            overflow: hidden;
-        
-            
-            
-            .img-background {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                z-index: 0;
-                // background-color: rgba(0, 0, 0, 0.6);
-                background-image: linear-gradient(to top, rgba(245, 246, 252, 0), #090c18);
-                background-size: cover;
-                color: white;
-                padding: 50px;
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: flex-start;
-            
+        padding: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
 
-            .poster-img {
-                width: 200px;
-                height: 250px;
-                object-fit: cover;
-                border-radius: 7px;
-                box-shadow: 3px 3px 15px #000;
+        .poster-img {
+          width: 200px;
+          height: 250px;
+          object-fit: cover;
+          border-radius: 7px;
+          box-shadow: 3px 3px 15px #000;
+        }
+
+        .selectedMovie-info {
+          width: 100%;
+          height: 250px;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+
+          p {
+            margin: 0;
+          }
+
+          .selectedMovie-title {
+            margin-top: 10px;
+            margin-left: 30px;
+            font-size: 30px;
+            font-weight: bold;
+          }
+
+          .selectedMovie-runtime-rating-releaseInfo-container {
+            max-width: 60%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-left: 10px;
+
+            .selectedMovie-imdbRating {
+              white-space: nowrap;
+              margin-left: 30px;
             }
 
-            .selectedMovie-info {
-                width: 100%;
-                height: 250px;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-                
-
-                p {
-                    margin: 0;
-                }
-            
-
-                .selectedMovie-title {
-                    margin-top: 10px;
-                    margin-left: 30px;
-                    font-size: 30px;
-                    font-weight: bold;
-                }
-
-                .selectedMovie-runtime-rating-releaseInfo-container {
-                    max-width: 60%;
-                    display: flex;
-                    justify-content: flex-start;
-                    align-items: center;
-                    font-size: 16px;
-                    font-weight: bold;
-                    margin-top: 20px;
-                    margin-left: 10px;
-    
-
-                    .selectedMovie-imdbRating {
-                        white-space: nowrap;
-                        margin-left: 30px;
-                    }
-
-                    .selectedMovie-runtime {
-                        // overflow: hidden;
-                        white-space: nowrap;
-                        margin-left: 30px;
-                    }
-
-                    .selectedMovie-genre-container {
-                        max-width: 70%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-            
-                        font-size: 16px;
-                        font-weight: bold;
-                        white-space: nowrap;
-                        margin-left: 20px;
-            
-            
-                        p {
-                            margin-left: 10px;
-                        }
-                    }
-
-                    .selectedMovie-releaseInfo {
-                        white-space: nowrap;
-                        margin-left: 30px;
-                    }
-    
-                }
-
-                .selectedMovie-summary-container {
-                    font-size: 15px;
-                    width: 70%;
-                    margin-left: 10px;
-                    overflow-y: hidden;
-                    margin-top: 20px;
-                    margin-left: 30px;
-    
-        
-                }
-                
-                
+            .selectedMovie-runtime {
+              // overflow: hidden;
+              white-space: nowrap;
+              margin-left: 30px;
             }
-            .movie-buttons-container {
-                width: 450px;
-                position: absolute;
-                bottom: 30px;
-                right: 30px;
-                display: flex;
-                justify-content: flex-end;
+
+            .selectedMovie-genre-container {
+              max-width: 70%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              font-size: 16px;
+              font-weight: bold;
+              white-space: nowrap;
+              margin-left: 20px;
+
+              p {
                 margin-left: 10px;
-                margin-top: 40px;
-
-                .selectedMovie-watch-now {
-                    width: 120px;
-                    height: 40px;
-                    background-color: #207fdd;
-                    box-shadow: 5px 8px 15px -5px #000;
-                    border-radius: 5px;
-                    border: none;
-                    color: white;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin-right: 30px;
-                    
-                    &:hover {
-                        cursor: pointer;
-                    }
-                }
-
-                .selectedMovie-add-to-library-button {
-                    width: 120px;
-                    height: 40px;
-                    background-color: #323942;
-                    box-shadow: 5px 8px 15px -5px #000;
-                    border-radius: 5px;
-                    border: none;
-                    color: white;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-weight: bold;
-
-                    &:hover {
-                        cursor: pointer;
-                    }
-                }
+              }
             }
-            }
-        }
-        }
 
-        &.clicked {
-            visibility: visible;
-            width: 100%;
-            height: 100%;
+            .selectedMovie-releaseInfo {
+              white-space: nowrap;
+              margin-left: 30px;
+            }
+          }
+
+          .selectedMovie-summary-container {
+            font-size: 15px;
+            width: 70%;
+            margin-left: 10px;
+            overflow-y: hidden;
+            margin-top: 20px;
+            margin-left: 30px;
+          }
         }
+        .movie-buttons-container {
+          width: 450px;
+          position: absolute;
+          bottom: 30px;
+          right: 30px;
+          display: flex;
+          justify-content: flex-end;
+          margin-left: 10px;
+          margin-top: 40px;
+
+          .selectedMovie-watch-now {
+            width: 120px;
+            height: 40px;
+            background-color: #207fdd;
+            box-shadow: 5px 8px 15px -5px #000;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 30px;
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+
+          .selectedMovie-add-to-library-button {
+            width: 120px;
+            height: 40px;
+            background-color: #323942;
+            box-shadow: 5px 8px 15px -5px #000;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.clicked {
+    visibility: visible;
+    width: 100%;
+    height: 100%;
+  }
 }

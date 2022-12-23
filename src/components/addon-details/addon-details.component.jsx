@@ -20,7 +20,6 @@ const AddonDetails = ({
     window.location.href = url;
   };
 
-  // console.log(selectedAddon);
   return (
     <div
       className={`${triggered ? "triggered" : ""} popup-display`}
